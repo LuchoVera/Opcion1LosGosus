@@ -68,4 +68,9 @@ public class PatronManager : IManager<Patron, string>
     {
         return patrons.Find(x => x.PatronId == patronId);
     }
+    public List<Patron> GetPatrons()
+    {
+        return patrons;
+    }
+
 }
