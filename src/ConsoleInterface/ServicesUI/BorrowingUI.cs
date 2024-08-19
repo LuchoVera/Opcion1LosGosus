@@ -1,6 +1,6 @@
 using Spectre.Console;
 
-public class BorrowingUI 
+public class BorrowingUI
 {
     private BorrowingManager _borrowingManager;
     private PatronManager _patronManager;
@@ -30,7 +30,7 @@ public class BorrowingUI
                         "3. Print Borrowing History",
                         "4. Generate Reports",
                         "5. Generate Patron Report",
-                        "4. Go back"
+                        "0. Go back"
                     }));
 
             switch (choice)
@@ -50,10 +50,10 @@ public class BorrowingUI
                 case "5. Generate Patron Report":
                     GeneratePatronReport();
                     break;
-                case "4. Go back":
+                case "0. Go back":
                     return;
                 default:
-                    AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
+                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -67,11 +67,10 @@ public class BorrowingUI
         if (!string.IsNullOrEmpty(patronId) && !string.IsNullOrEmpty(bookISBN))
         {
             patronActions.BorrowBook(patronId, bookISBN);
-            AnsiConsole.MarkupLine("[green]Book borrowed successfully![/]");
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Invalid book ISBN or patron ID. Please try again.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or patron ID. Please try again."));
         }
 
         Pause();
@@ -89,7 +88,7 @@ public class BorrowingUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Invalid book ISBN or patron ID. Please try again.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or patron ID. Please try again."));
         }
 
         Pause();
@@ -106,7 +105,7 @@ public class BorrowingUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Invalid patron ID. Please try again.[/]");
+            ErrorHandler.HandleError(new InvalidPatronException("Invalid patron ID. Please try again."));
         }
 
         Pause();
@@ -117,7 +116,7 @@ public class BorrowingUI
         try
         {
             string reportsDirectory = "Reports";
-            
+
             if (!Directory.Exists(reportsDirectory))
             {
                 Directory.CreateDirectory(reportsDirectory);
@@ -126,14 +125,15 @@ public class BorrowingUI
             var borrowedBooksReport = _bookManager.GetCurrentBorrowedBooks();
             File.WriteAllText(Path.Combine(reportsDirectory, "CurrentlyBorrowedBooks.txt"), borrowedBooksReport);
             AnsiConsole.MarkupLine("[green]Currently borrowed books report generated.[/]");
-            
+
             var overdueBooksReport = _borrowingManager.GetOverdueBooks();
             File.WriteAllText(Path.Combine(reportsDirectory, "OverdueBooks.txt"), overdueBooksReport);
             AnsiConsole.MarkupLine("[green]Overdue books report generated.[/]");
         }
         catch (Exception ex)
         {
-            AnsiConsole.MarkupLine("[red]Error generating reports: {0}[/]", ex.Message);
+            AnsiConsole.MarkupLine("[red]Error generating reports: {0}[/]");
+            ErrorHandler.HandleError(ex);
         }
         Pause();
     }
@@ -143,7 +143,7 @@ public class BorrowingUI
         try
         {
             string reportsDirectory = "Reports";
-            
+
             if (!Directory.Exists(reportsDirectory))
             {
                 Directory.CreateDirectory(reportsDirectory);
@@ -164,7 +164,8 @@ public class BorrowingUI
         }
         catch (Exception ex)
         {
-            AnsiConsole.MarkupLine("[red]Error generating reports: {0}[/]", ex.Message);
+            AnsiConsole.MarkupLine("[red]Error generating reports: {0}[/]");
+            ErrorHandler.HandleError(ex);
         }
         Pause();
     }

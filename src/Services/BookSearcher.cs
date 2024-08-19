@@ -1,7 +1,7 @@
 public class BookSearcher
 {
     private List<Book> _books = new List<Book>();
-    
+
     public BookSearcher(List<Book> books)
     {
         _books = books;
@@ -12,14 +12,13 @@ public class BookSearcher
         return SearchBy(x => x.Title == title);
     }
     public List<Book> SearchByAuthor(string author)
-    { 
+    {
         return SearchBy(x => x.Author == author);
     }
-    public Book SearchByISBN(string isbn)
+    public Book? SearchByISBN(string isbn)
     {
         var book = _books.Find(x => x.ISBN == isbn);
-        return book != null ? book : throw new Exception("Book not found");
-
+        return book;
     }
 
     public List<Book> SearchBy(Predicate<Book> predicate)

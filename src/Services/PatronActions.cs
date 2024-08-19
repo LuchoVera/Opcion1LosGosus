@@ -19,13 +19,13 @@ public class PatronActions
 
         if (book == null || patron == null)
         {
-            Console.WriteLine("Invalid book or patron ID.");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron ID."));
             return;
         }
 
         if (book.IsBorrowed)
         {
-            Console.WriteLine("The book is already borrowed.");
+            ErrorHandler.HandleError(new InvalidBookException("The book is already borrowed."));
             return;
         }
 
@@ -43,7 +43,7 @@ public class PatronActions
 
         if (book == null || patron == null)
         {
-            Console.WriteLine("Invalid book or patron ID.");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron ID."));
             return;
         }
 
@@ -65,7 +65,7 @@ public class PatronActions
 
         if (patron == null)
         {
-            Console.WriteLine("Invalid patron ID.");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron ID."));
             return;
         }
 
