@@ -5,9 +5,12 @@ public class MainMenuUI
     private static BookController bookController = new BookController();
     private static PatronController patronController = new PatronController();
     private static BorrowingManager borrowingManager = new BorrowingManager();
+    private static LibraryStatistics libraryStatistics = new LibraryStatistics(bookController.GetBookManager(), borrowingManager, patronController.GetPatronManager());
     private BookManagerUI bookManagerUI = new BookManagerUI(bookController);
     private PatronManagerUI patronManagerUI = new PatronManagerUI(patronController);
     private BorrowingUI borrowingUI = new BorrowingUI(borrowingManager, patronController.GetPatronManager(), bookController.GetBookManager());
+    private StatisticsUI statisticsUI = new StatisticsUI(libraryStatistics);
+    
 
     public void Run()
     {
@@ -22,7 +25,8 @@ public class MainMenuUI
                         "1. Book Management",
                         "2. Patron Management",
                         "3. Borrowing Management",
-                        "4. Exit"
+                        "4. Statistics",
+                        "5. Exit"
                     }));
 
             switch (choice)
@@ -36,7 +40,10 @@ public class MainMenuUI
                 case "3. Borrowing Management":
                     borrowingUI.Run();
                     break;
-                case "4. Exit":
+                case "4. Statistics":
+                    statisticsUI.Run();
+                    break;
+                case "5. Exit":
                     return;
                 default:
                     AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
