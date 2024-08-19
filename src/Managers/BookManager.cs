@@ -114,5 +114,10 @@ public class BookManager : IManager<Book, string>
         return result.ToString();
     }
 
+    public List<Book> GetBooks()
+    {
+        return books;
+    }
+    
 
 }
