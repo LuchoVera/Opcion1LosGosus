@@ -32,4 +32,8 @@ public class BorrowingManager {
         return string.Join(Environment.NewLine, history);
     }
 
+    public List<BorrowingRecord> GetBorrowingRecords()
+    {
+        return borrowingRecords;
+    }
 }
