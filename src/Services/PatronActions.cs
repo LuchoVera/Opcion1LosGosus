@@ -47,7 +47,7 @@ public class PatronActions
             return;
         }
 
-        BorrowingRecord record = borrowingManager.FindBorrowingRecord(patron, book);
+        BorrowingRecord? record = borrowingManager.FindBorrowingRecord(patron, book);
         if (record == null)
         {
             Console.WriteLine("No borrowing record found for this book and patron.");
