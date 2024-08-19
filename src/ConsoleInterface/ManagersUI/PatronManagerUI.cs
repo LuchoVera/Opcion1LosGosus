@@ -26,7 +26,7 @@ public class PatronManagerUI
                         "3. Delete Patron",
                         "4. List Patrons",
                         "5. Search Patrons",
-                        "4. Go back"
+                        "0. Go back"
                     }));
 
             switch (choice)
@@ -46,7 +46,7 @@ public class PatronManagerUI
                 case "5. Search Patrons":
                     SearchPatrons();
                     break;
-                case "4. Go back":
+                case "0. Go back":
                     return;
                 default:
                     AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
@@ -71,7 +71,7 @@ public class PatronManagerUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Patron is not valid. Please check the details and try again.[/]");
+            ErrorHandler.HandleError(new InvalidPatronException("Patron is not valid. Please check the information and try again."));
         }
 
         Pause();
@@ -93,7 +93,7 @@ public class PatronManagerUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Patron is not valid. Please check the details and try again.[/]");
+            ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron information."));
         }
 
         Pause();
@@ -102,8 +102,15 @@ public class PatronManagerUI
     private void DeletePatron()
     {
         string patronId = AnsiConsole.Ask<string>("Enter Patron ID:");
-        patronController.DeletePatron(patronId);
-        AnsiConsole.MarkupLine("[green]Patron deleted successfully![/]");
+        try
+        {
+            patronController.DeletePatron(patronId);
+            AnsiConsole.MarkupLine("[green]Patron deleted successfully![/]");
+        }
+        catch (Exception)
+        {
+            ErrorHandler.HandleError(new InvalidPatronException("Error deleting the patron"));
+        }
         Pause();
     }
 

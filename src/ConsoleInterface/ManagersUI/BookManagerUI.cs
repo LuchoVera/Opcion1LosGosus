@@ -27,7 +27,7 @@ public class BookManagerUI
                         "4. List Books",
                         "5. List Books by Genre",
                         "6. Search Books",
-                        "4. Go back"
+                        "0. Go back"
                     }));
 
             switch (choice)
@@ -50,7 +50,7 @@ public class BookManagerUI
                 case "6. Search Books":
                     SearchBooks();
                     break;
-                case "4. Go back":
+                case "0. Go back":
                     return;
                 default:
                     AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
@@ -76,9 +76,9 @@ public class BookManagerUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Book is not valid. Please check the details and try again.[/]");
+            ErrorHandler.HandleError(new InvalidBookException("Invalid Book Information"));
         }
-        
+
         Pause();
     }
 
@@ -99,17 +99,24 @@ public class BookManagerUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Book is not valid. Please check the details and try again.[/]");
+            ErrorHandler.HandleError(new InvalidBookException("Book is not valid. Please check the details and try again."));
         }
-        
+
         Pause();
     }
 
     private void DeleteBook()
     {
         string isbn = AnsiConsole.Ask<string>("Enter ISBN of the book to delete:");
-        bookController.DeleteBook(isbn);
-        AnsiConsole.MarkupLine("[green]Book deleted successfully![/]");
+        try
+        {
+            bookController.DeleteBook(isbn);
+            AnsiConsole.MarkupLine("[green]Book deleted successfully![/]");
+        }
+        catch (Exception)
+        {
+            ErrorHandler.HandleError(new InvalidBookException("Error deleting the book"));
+        }
         Pause();
     }
 

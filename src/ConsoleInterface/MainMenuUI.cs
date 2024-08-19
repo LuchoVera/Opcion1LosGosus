@@ -26,7 +26,7 @@ public class MainMenuUI
                         "2. Patron Management",
                         "3. Borrowing Management",
                         "4. Statistics",
-                        "5. Exit"
+                        "0. Exit"
                     }));
 
             switch (choice)
@@ -43,7 +43,7 @@ public class MainMenuUI
                 case "4. Statistics":
                     statisticsUI.Run();
                     break;
-                case "5. Exit":
+                case "0. Exit":
                     return;
                 default:
                     AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
