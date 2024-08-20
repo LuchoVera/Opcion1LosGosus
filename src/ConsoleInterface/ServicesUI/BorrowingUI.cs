@@ -84,7 +84,6 @@ public class BorrowingUI
         if (!string.IsNullOrEmpty(patronId) && !string.IsNullOrEmpty(bookISBN))
         {
             patronActions.ReturnBook(patronId, bookISBN);
-            AnsiConsole.MarkupLine("[green]Book returned successfully![/]");
         }
         else
         {
@@ -101,7 +100,6 @@ public class BorrowingUI
         if (!string.IsNullOrEmpty(patronId))
         {
             patronActions.PrintBorrowingHistory(patronId);
-            AnsiConsole.MarkupLine("[green]Borrowing history printed successfully![/]");
         }
         else
         {
@@ -155,11 +153,10 @@ public class BorrowingUI
             {
                 var borrowingHistoryReport = _borrowingManager.GetBorrowingHistory(patronId);
                 File.WriteAllText(Path.Combine(reportsDirectory, $"{patronId}_BorrowingHistory.txt"), borrowingHistoryReport);
-                AnsiConsole.MarkupLine("[green]Borrowing history report for patron {0} generated.[/]", patronId);
             }
             else
             {
-                AnsiConsole.MarkupLine("[red]Invalid patron ID. Please try again.[/]");
+                ErrorHandler.HandleError(new InvalidPatronException("Invalid patron ID. Please try again."));
             }
         }
         catch (Exception ex)
