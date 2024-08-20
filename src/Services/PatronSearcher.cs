@@ -11,10 +11,15 @@ public class PatronSearcher
     {
         return SearchBy(x => x.Name == name);
     }
-    public Patron SearchByMemberShipNumber(string mememberShipNumber)
+    public Patron? SearchByMemberShipNumber(string mememberShipNumber)
     { 
         var patron = _patrons.Find(x => x.MemberShipNumber == mememberShipNumber);
-        return patron != null ? patron : throw new Exception("Patron not found");
+        if (patron == null)
+        {
+            ErrorHandler.HandleError(new InvalidPatronException("Patron not found"));
+            return patron;
+        }
+        return patron;
 
     }
 
