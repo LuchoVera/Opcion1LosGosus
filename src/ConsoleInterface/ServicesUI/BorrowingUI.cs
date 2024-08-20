@@ -5,14 +5,16 @@ public class BorrowingUI
     private BorrowingManager _borrowingManager;
     private PatronManager _patronManager;
     private BookManager _bookManager;
+    private ReserveManager _reserveManager;
     private PatronActions patronActions;
 
-    public BorrowingUI(BorrowingManager borrowingManager, PatronManager patronManager, BookManager bookManager)
+    public BorrowingUI(BorrowingManager borrowingManager, PatronManager patronManager, BookManager bookManager, ReserveManager reserveManager)
     {
         _borrowingManager = borrowingManager;
         _patronManager = patronManager;
         _bookManager = bookManager;
-        patronActions = new PatronActions(borrowingManager, patronManager, bookManager);
+        _reserveManager = reserveManager;
+        patronActions = new PatronActions(borrowingManager, patronManager, bookManager, reserveManager);
     }
 
     public void Run()
