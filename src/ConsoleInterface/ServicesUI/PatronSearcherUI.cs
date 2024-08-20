@@ -21,7 +21,7 @@ public class PatronSearcherUI
                     .AddChoices(new[] {
                         "1. Search by Name",
                         "2. Search by Membership Number",
-                        "4. Go back"
+                        "0. Go back"
                     }));
 
             switch (choice)
@@ -32,10 +32,10 @@ public class PatronSearcherUI
                 case "2. Search by Membership Number":
                     SearchByMemberShipNumber();
                     break;
-                case "4. Go back":
+                case "0. Go back":
                     return;
                 default:
-                    AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
+                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -51,7 +51,7 @@ public class PatronSearcherUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Name cannot be empty.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Name cannot be empty."));
         }
         Pause();
     }
@@ -66,7 +66,7 @@ public class PatronSearcherUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Membership number cannot be empty.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Membership number cannot be empty."));
         }
         Pause();
     }

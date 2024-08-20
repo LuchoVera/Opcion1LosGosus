@@ -22,7 +22,7 @@ public class BookSearcherUI
                         "1. Search by Title",
                         "2. Search by Author",
                         "3. Search by ISBN",
-                        "4. Go back"
+                        "0. Go back"
                     }));
 
             switch (choice)
@@ -36,10 +36,10 @@ public class BookSearcherUI
                 case "3. Search by ISBN":
                     SearchByISBN();
                     break;
-                case "4. Go back":
+                case "0. Go back":
                     return;
                 default:
-                    AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
+                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -54,7 +54,7 @@ public class BookSearcherUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Title cannot be empty.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Title cannot be empty."));
         }
         Pause();
     }
@@ -68,7 +68,7 @@ public class BookSearcherUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Author cannot be empty.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Author cannot be empty."));
         }
         Pause();
     }
@@ -82,7 +82,7 @@ public class BookSearcherUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]ISBN cannot be empty.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("ISBN cannot be empty."));
         }
         Pause();
     }
