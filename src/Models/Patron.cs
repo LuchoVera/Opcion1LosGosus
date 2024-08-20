@@ -4,6 +4,8 @@ public class Patron {
     public string MemberShipNumber { get; private set; }
     public string ContactDetails { get; private set; }
     private List<BorrowingRecord> borrowingRecords;
+    private List<Reserve> ReservedRecords;
+    
 
     public Patron(string name, string patronId, string membershipNumber, string contactDetails)
     {
@@ -12,6 +14,7 @@ public class Patron {
         MemberShipNumber = membershipNumber;
         ContactDetails = contactDetails;
         borrowingRecords = new List<BorrowingRecord>();
+        ReservedRecords = [];
     }
 
     public override string ToString() {
@@ -26,6 +29,16 @@ public class Patron {
     public List<BorrowingRecord> GetBorrowingHistory()
     {
         return new List<BorrowingRecord>(borrowingRecords);
+    }
+
+    public void AddReserveRecord(Reserve reserve)
+    {
+        ReservedRecords.Add(reserve);
+    }
+
+    public List<Reserve> GetReserveHistory()
+    {
+        return ReservedRecords;
     }
 
 }
