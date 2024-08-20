@@ -5,10 +5,11 @@ public class MainMenuUI
     private static BookController bookController = new BookController();
     private static PatronController patronController = new PatronController();
     private static BorrowingManager borrowingManager = new BorrowingManager();
+    private static ReserveManager reserveManager = new();
     private static LibraryStatistics libraryStatistics = new LibraryStatistics(bookController.GetBookManager(), borrowingManager, patronController.GetPatronManager());
     private BookManagerUI bookManagerUI = new BookManagerUI(bookController);
     private PatronManagerUI patronManagerUI = new PatronManagerUI(patronController);
-    private BorrowingUI borrowingUI = new BorrowingUI(borrowingManager, patronController.GetPatronManager(), bookController.GetBookManager());
+    private BorrowingUI borrowingUI = new BorrowingUI(borrowingManager, patronController.GetPatronManager(), bookController.GetBookManager(), reserveManager);
     private StatisticsUI statisticsUI = new StatisticsUI(libraryStatistics);
     
 

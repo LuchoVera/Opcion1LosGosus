@@ -3,13 +3,15 @@ public class PatronActions
     private BorrowingManager borrowingManager;
     private PatronManager patronManager;
     private BookManager bookManager;
+    private ReserveManager ReserveManager;
     private const int maxBorrowDays = 14;
 
-    public PatronActions(BorrowingManager borrowingManager, PatronManager patronManager, BookManager bookManager)
+    public PatronActions(BorrowingManager borrowingManager, PatronManager patronManager, BookManager bookManager, ReserveManager reserveManager)
     {
         this.borrowingManager = borrowingManager;
         this.patronManager = patronManager;
         this.bookManager = bookManager;
+        ReserveManager = reserveManager;
     }
 
     public void BorrowBook(string patronId, string bookISBN)
@@ -55,8 +57,46 @@ public class PatronActions
         }
 
         record.ReturnBook(DateTime.Now);
+        ReserveVerify(book);
         book.Return();
         Console.WriteLine("Book returned successfully. Fine: $" + record.CalculateFine());
+    }
+
+    private void ReserveVerify(Book book)
+    {
+        if (book.IsReserved)
+        {
+            Reserve? reserve = ReserveManager.FindReserve(book);
+            if (reserve != null)
+            {
+                book.EndReserve();
+                BorrowBook(reserve.ReservedBy.PatronId, book.ISBN);
+            }
+        }
+    }
+
+    public void ReserveBook(string patronId, string bookISBN)
+    {
+        Patron? patron = patronManager.GetPatronById(patronId);
+        Book? book = bookManager.GetBookByISBN(bookISBN);
+
+        if (book == null || patron == null)
+        {
+            Console.WriteLine("Invalid book or patron ID.");
+            return;
+        }
+
+        if (book.IsReserved)
+        {
+            Console.WriteLine("The book is already reserved.");
+            return;
+        }
+
+        Reserve reserve = new(patron, book);
+        ReserveManager.AddReserve(reserve);
+        patron.AddReserveRecord(reserve);
+        book.Reserve();
+        Console.WriteLine("book reserved");
     }
 
     public void PrintBorrowingHistory(string patronId)
