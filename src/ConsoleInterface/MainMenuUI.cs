@@ -11,7 +11,8 @@ public class MainMenuUI
     private PatronManagerUI patronManagerUI = new PatronManagerUI(patronController);
     private BorrowingUI borrowingUI = new BorrowingUI(borrowingManager, patronController.GetPatronManager(), bookController.GetBookManager(), reserveManager);
     private StatisticsUI statisticsUI = new StatisticsUI(libraryStatistics);
-    
+
+    private ReserveUI reserveUI = new ReserveUI(reserveManager, patronController.GetPatronManager(), bookController.GetBookManager());
 
     public void Run()
     {
@@ -26,7 +27,8 @@ public class MainMenuUI
                         "1. Book Management",
                         "2. Patron Management",
                         "3. Borrowing Management",
-                        "4. Statistics",
+                        "4. Reservation Management", 
+                        "5. Statistics",
                         "0. Exit"
                     }));
 
@@ -41,7 +43,10 @@ public class MainMenuUI
                 case "3. Borrowing Management":
                     borrowingUI.Run();
                     break;
-                case "4. Statistics":
+                case "4. Reservation Management":  
+                    reserveUI.Run();
+                    break;
+                case "5. Statistics":
                     statisticsUI.Run();
                     break;
                 case "0. Exit":
