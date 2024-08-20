@@ -5,7 +5,7 @@ public class Book {
     public string Genre { get; private set; }
     public int PublicationYear { get; private set; }
     public bool IsBorrowed { get; private set; }
-    public Patron? ReservedBy { get; private set; }
+    public bool IsReserved { get; private set; }
 
     public Book(string title, string author, string isbn, string genre, int publicationYear) {
         Title = title;
@@ -14,16 +14,34 @@ public class Book {
         Genre = genre;
         PublicationYear = publicationYear;
         IsBorrowed = false;
+        IsReserved = false;
     }
 
     public void Borrow() 
     {
-        IsBorrowed = true;
-        ReservedBy = null;
+        if (!IsReserved) 
+        {
+            IsBorrowed = true;
+        }
+    }
+
+    public bool Reserve()
+    {
+        if(IsBorrowed)
+        {
+            IsReserved = true;
+        }
+
+        return IsReserved;
     }
     public void Return() 
     { 
         IsBorrowed = false;
+    }
+
+    public void EndReserve()
+    {
+        IsReserved = false;
     }
 
     public override string ToString() {
