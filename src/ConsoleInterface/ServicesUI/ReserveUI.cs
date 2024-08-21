@@ -6,13 +6,15 @@ public class ReserveUI
     private readonly PatronManager _patronManager;
     private readonly BookManager _bookManager;
     private readonly PatronActions _patronActions;
+    private BorrowingManager _borrowingManager;
 
-    public ReserveUI(ReserveManager reserveManager, PatronManager patronManager, BookManager bookManager)
+    public ReserveUI(BorrowingManager borrowingManager,ReserveManager reserveManager, PatronManager patronManager, BookManager bookManager)
     {
+        _borrowingManager = borrowingManager;
         _reserveManager = reserveManager;
         _patronManager = patronManager;
         _bookManager = bookManager;
-        _patronActions = new PatronActions(null, patronManager, bookManager, reserveManager);
+        _patronActions = new PatronActions(borrowingManager, patronManager, bookManager, reserveManager);
     }
 
     public void Run()

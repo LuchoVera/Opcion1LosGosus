@@ -12,7 +12,7 @@ public class MainMenuUI
     private BorrowingUI borrowingUI = new BorrowingUI(borrowingManager, patronController.GetPatronManager(), bookController.GetBookManager(), reserveManager);
     private StatisticsUI statisticsUI = new StatisticsUI(libraryStatistics);
 
-    private ReserveUI reserveUI = new ReserveUI(reserveManager, patronController.GetPatronManager(), bookController.GetBookManager());
+    private ReserveUI reserveUI = new ReserveUI(borrowingManager, reserveManager, patronController.GetPatronManager(), bookController.GetBookManager());
 
     public void Run()
     {
