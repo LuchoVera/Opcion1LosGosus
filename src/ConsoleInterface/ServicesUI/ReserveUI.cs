@@ -41,7 +41,7 @@ public class ReserveUI
                 case "3. Go back":
                     return;
                 default:
-                    AnsiConsole.MarkupLine("[red]Invalid option. Please try again.[/]");
+                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -67,12 +67,12 @@ public class ReserveUI
             }
             else
             {
-                AnsiConsole.MarkupLine("[red]Invalid book ISBN. Please try again.[/]");
+                ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN. Please try again"));
             }
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Invalid book ISBN or patron ID. Please try again.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or patron ID. Please try again"));
         }
         Pause();
     }
@@ -95,7 +95,9 @@ public class ReserveUI
         }
         else
         {
-            AnsiConsole.MarkupLine("[red]Invalid book ISBN. Please try again.[/]");
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN. Please try again"));
+
+
         }
 
         Pause();
