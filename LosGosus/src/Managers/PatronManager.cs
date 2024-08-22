@@ -64,9 +64,9 @@ public class PatronManager : IManager<Patron, string>
         }
     }
 
-    public Patron? GetPatronById(string patronId)
+    public Patron? GetPatronByMembershipNumber(string membershipNumber)
     {
-        return patrons.Find(x => x.PatronId == patronId);
+        return patrons.Find(x => x.MemberShipNumber == membershipNumber);
     }
     public List<Patron> GetPatrons()
     {
