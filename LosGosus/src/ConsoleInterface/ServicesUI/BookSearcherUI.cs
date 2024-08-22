@@ -56,7 +56,7 @@ public class BookSearcherUI
         {
             ErrorHandler.HandleError(new InvalidInputException("Title cannot be empty."));
         }
-        Pause();
+        
     }
 
     private void SearchByAuthor()
@@ -70,7 +70,7 @@ public class BookSearcherUI
         {
             ErrorHandler.HandleError(new InvalidInputException("Author cannot be empty."));
         }
-        Pause();
+        
     }
 
     private void SearchByISBN()

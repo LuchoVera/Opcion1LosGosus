@@ -118,7 +118,7 @@ public class PatronManagerUI
     {
         AnsiConsole.MarkupLine("[bold yellow]Listing all patrons:[/]");
         patronController.ListPatrons();
-        Pause();
+        
     }
 
     private void SearchPatrons()
