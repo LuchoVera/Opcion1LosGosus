@@ -24,10 +24,7 @@ public class PatronManager : IManager<Patron, string>
 
     public void List() 
     {
-        foreach (Patron patron in patrons) 
-        {
-            Console.WriteLine(patron);
-        }
+        Paginator.Paginate<Patron>(patrons);
     }
 
     public void ShowPatronByMembershipNumber(string membershipNumber) 
@@ -44,10 +41,7 @@ public class PatronManager : IManager<Patron, string>
         if (patronSearcher != null)
         {
             var patrons = patronSearcher.SearchByName(name);
-            foreach (var patron in patrons)
-            {
-                Console.WriteLine(patron);
-            }
+            Paginator.Paginate<Patron>(patrons);
         }
     }
 
