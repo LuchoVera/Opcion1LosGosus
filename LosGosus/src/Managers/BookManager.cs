@@ -27,10 +27,7 @@ public class BookManager : IManager<Book, string>
 
     public void List() 
     {
-        foreach (Book book in books) 
-        {
-            Console.WriteLine(book);
-        }
+        Paginator.Paginate<Book>(books);
     }
 
     public void ShowBookByTitle(string title) 
@@ -38,10 +35,7 @@ public class BookManager : IManager<Book, string>
         if(bookSearcher != null)
         {
             var books = bookSearcher.SearchByTitle(title);
-            foreach (var book in books)
-            {
-                Console.WriteLine(book);
-            }
+            Paginator.Paginate<Book>(books);
         }
     }
 
@@ -50,10 +44,7 @@ public class BookManager : IManager<Book, string>
         if(bookSearcher != null)
         {
             var books = bookSearcher.SearchByAuthor(author);
-            foreach (var book in books)
-            {
-                Console.WriteLine(book);
-            }
+            Paginator.Paginate<Book>(books);
         }
     }
 
@@ -71,10 +62,7 @@ public class BookManager : IManager<Book, string>
         if(bookSearcher != null)
         {
             var foundBooks = books.FindAll(x => x.Genre == genre);
-            foreach (var book in foundBooks)
-            {
-                Console.WriteLine(book);
-            }
+            Paginator.Paginate<Book>(foundBooks);
         }
     }
 
@@ -91,10 +79,7 @@ public class BookManager : IManager<Book, string>
     public void ListBorrowedBooks() 
     {
         var borrowedBooks = books.FindAll(x => x.IsBorrowed);
-        foreach (var book in borrowedBooks)
-        {
-            Console.WriteLine(book);
-        }
+        Paginator.Paginate<Book>(borrowedBooks);
     }
     public List<Book> SearchBy(Predicate<Book> predicate)
     {
