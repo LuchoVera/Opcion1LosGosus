@@ -96,7 +96,6 @@ public class PatronActions
         ReserveManager.AddReserve(reserve);
         patron.AddReserveRecord(reserve);
         book.Reserve();
-        Console.WriteLine("book reserved");
     }
 
     public void PrintBorrowingHistory(string patronId)
