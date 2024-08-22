@@ -124,14 +124,12 @@ public class BookManagerUI
     {
         AnsiConsole.MarkupLine("[bold yellow]Listing all books:[/]");
         bookController.ListBooks();
-        Pause();
     }
 
     private void ListBooksByGenre()
     {
         string genre = AnsiConsole.Ask<string>("Enter genre to list books:");
         bookController.ListBooksByGenre(genre);
-        Pause();
     }
 
     private void SearchBooks()
