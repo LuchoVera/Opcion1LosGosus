@@ -18,7 +18,7 @@ public class Patron {
     }
 
     public override string ToString() {
-        return $"Name: {Name}, Contact Details: {ContactDetails}\nPatron ID: {PatronId}, Membership Number: {MemberShipNumber}\n";
+        return $"Name: {Name}, Contact Details: {ContactDetails}\nMembership Number: {MemberShipNumber}\n";
     }
     
     public void AddBorrowingRecord(BorrowingRecord record)
