@@ -63,16 +63,16 @@ public class BorrowingUI
 
     private void BorrowBook()
     {
-        string patronId = AnsiConsole.Ask<string>("Enter [yellow]Patron ID[/]:");
+        string membershipNumber = AnsiConsole.Ask<string>("Enter [yellow]Patron MembershipNumber[/]:");
         string bookISBN = AnsiConsole.Ask<string>("Enter [yellow]Book ISBN[/]:");
 
-        if (!string.IsNullOrEmpty(patronId) && !string.IsNullOrEmpty(bookISBN))
+        if (!string.IsNullOrEmpty(membershipNumber) && !string.IsNullOrEmpty(bookISBN))
         {
-            patronActions.BorrowBook(patronId, bookISBN);
+            patronActions.BorrowBook(membershipNumber, bookISBN);
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or patron ID. Please try again."));
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or Patron MembershipNumber. Please try again."));
         }
 
         Pause();
@@ -80,16 +80,16 @@ public class BorrowingUI
 
     private void ReturnBook()
     {
-        string patronId = AnsiConsole.Ask<string>("Enter [yellow]Patron ID[/]:");
+        string membershipNumber = AnsiConsole.Ask<string>("Enter [yellow]Patron MembershipNumber[/]:");
         string bookISBN = AnsiConsole.Ask<string>("Enter [yellow]Book ISBN[/]:");
 
-        if (!string.IsNullOrEmpty(patronId) && !string.IsNullOrEmpty(bookISBN))
+        if (!string.IsNullOrEmpty(membershipNumber) && !string.IsNullOrEmpty(bookISBN))
         {
-            patronActions.ReturnBook(patronId, bookISBN);
+            patronActions.ReturnBook(membershipNumber, bookISBN);
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or patron ID. Please try again."));
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or Patron MembershipNumber. Please try again."));
         }
 
         Pause();
@@ -97,15 +97,15 @@ public class BorrowingUI
 
     private void PrintBorrowingHistory()
     {
-        string patronId = AnsiConsole.Ask<string>("Enter [yellow]Patron ID[/]:");
+        string membershipNumber = AnsiConsole.Ask<string>("Enter [yellow]Patron MembershipNumber[/]:");
 
-        if (!string.IsNullOrEmpty(patronId))
+        if (!string.IsNullOrEmpty(membershipNumber))
         {
-            patronActions.PrintBorrowingHistory(patronId);
+            patronActions.PrintBorrowingHistory(membershipNumber);
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidPatronException("Invalid patron ID. Please try again."));
+            ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
         }
 
         Pause();
@@ -149,16 +149,16 @@ public class BorrowingUI
                 Directory.CreateDirectory(reportsDirectory);
             }
 
-            string patronId = AnsiConsole.Ask<string>("Enter [yellow]Patron ID[/]:");
+            string membershipNumber = AnsiConsole.Ask<string>("Enter [yellow]Patron MembershipNumber[/]:");
 
-            if (!string.IsNullOrEmpty(patronId))
+            if (!string.IsNullOrEmpty(membershipNumber))
             {
-                var borrowingHistoryReport = _borrowingManager.GetBorrowingHistory(patronId);
-                File.WriteAllText(Path.Combine(reportsDirectory, $"{patronId}_BorrowingHistory.txt"), borrowingHistoryReport);
+                var borrowingHistoryReport = _borrowingManager.GetBorrowingHistory(membershipNumber);
+                File.WriteAllText(Path.Combine(reportsDirectory, $"{membershipNumber}_BorrowingHistory.txt"), borrowingHistoryReport);
             }
             else
             {
-                ErrorHandler.HandleError(new InvalidPatronException("Invalid patron ID. Please try again."));
+                ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
             }
         }
         catch (Exception ex)
