@@ -47,13 +47,12 @@ public class PatronSearcherUI
         if (!string.IsNullOrEmpty(name))
         {
             patronManager.ShowPatronByName(name);
-            AnsiConsole.MarkupLine("[green]Search completed.[/]");
         }
         else
         {
             ErrorHandler.HandleError(new InvalidInputException("Name cannot be empty."));
         }
-        Pause();
+        
     }
 
     private void SearchByMemberShipNumber()
