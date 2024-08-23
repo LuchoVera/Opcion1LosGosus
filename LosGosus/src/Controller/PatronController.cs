@@ -19,7 +19,7 @@ public class PatronController
         Patron patron = new Patron(name, patronId, memberShipNumber, contactDetails);
         if (patronValidator.Validate(patron))
         {
-            patronManager.Update(patron, patronId);
+            patronManager.Update(patron, memberShipNumber);
             return true;
         }
         return false;

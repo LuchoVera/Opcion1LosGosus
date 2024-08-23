@@ -1,17 +1,25 @@
-public class ReserveManager
+public class ReserveManager : ManagerBase<Reserve, string>
 {
-    private List<Reserve> ReserveRecords;
-
-    public ReserveManager() {
-        ReserveRecords = [];
-    }
 
     public void AddReserve(Reserve reserve) {
-        ReserveRecords.Add(reserve);
+        items.Add(reserve);
     }
 
     public Reserve? FindReserve(Book book) {
-        var reserve = ReserveRecords.FindLast(r => r.ReservedBook == book);
+        var reserve = items.FindLast(r => r.ReservedBook == book);
         return reserve;
+    }
+
+    protected override int ReturnIndex(string code)
+    {
+        var reserve = items.Find(x => x.ReservedBy.MemberShipNumber == code);
+        if (reserve != null)
+        {
+            return items.IndexOf(reserve);
+        }
+        else
+        {
+            return -1;
+        }
     }
 }
