@@ -14,26 +14,26 @@ public class BorrowingManager {
         return record;
     }
 
-    public string GetOverdueBooks()
+    public void GetOverdueBooks()
     {
         var overdueBooks = borrowingRecords
             .Where(record => record.IsOverdue())
             .Select(record => record.ToString());
 
-        return string.Join(Environment.NewLine, overdueBooks);
+        Paginator.Paginate<BorrowingRecord>(overdueBooks);
     }
 
-    public string GetBorrowingHistory(string patronId)
+    public void GetBorrowingHistory(string patronId)
     {
         var history = borrowingRecords
             .Where(record => record.BorrowedBy.PatronId == patronId)
             .Select(record => record.ToString());
 
-        return string.Join(Environment.NewLine, history);
+        Paginator.Paginate<BorrowingRecord>(history);
     }
 
-    public List<BorrowingRecord> GetBorrowingRecords()
+    public void GetBorrowingRecords()
     {
-        return borrowingRecords;
+        Paginator.Paginate<BorrowingRecord>(borrowingRecords);
     }
 }

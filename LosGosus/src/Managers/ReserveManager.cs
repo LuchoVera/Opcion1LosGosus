@@ -3,7 +3,7 @@ public class ReserveManager
     private List<Reserve> ReserveRecords;
 
     public ReserveManager() {
-        ReserveRecords = [];
+        ReserveRecords = new List<Reserve>();
     }
 
     public void AddReserve(Reserve reserve) {
@@ -13,5 +13,10 @@ public class ReserveManager
     public Reserve? FindReserve(Book book) {
         var reserve = ReserveRecords.FindLast(r => r.ReservedBook == book);
         return reserve;
+    }
+
+    public void ListReserves()
+    {
+        Paginator.Paginate<Reserve>(ReserveRecords);
     }
 }
