@@ -3,9 +3,9 @@ public class PatronController
     private PatronManager patronManager = new PatronManager();
     private PatronValidator patronValidator = new PatronValidator();
 
-    public bool TryAddPatron(string name, string patronId, string memberShipNumber, string contactDetails)
+    public bool TryAddPatron(string name, string memberShipNumber, string contactDetails)
     {
-        Patron patron = new Patron(name, patronId, memberShipNumber, contactDetails);
+        Patron patron = new Patron(name, memberShipNumber, contactDetails);
         if (patronValidator.Validate(patron))
         {
             patronManager.Add(patron);
@@ -14,9 +14,9 @@ public class PatronController
         return false;
     }
 
-    public bool TryUpdatePatron(string name, string patronId, string memberShipNumber, string contactDetails)
+    public bool TryUpdatePatron(string name, string memberShipNumber, string contactDetails)
     {
-        Patron patron = new Patron(name, patronId, memberShipNumber, contactDetails);
+        Patron patron = new Patron(name, memberShipNumber, contactDetails);
         if (patronValidator.Validate(patron))
         {
             patronManager.Update(patron, memberShipNumber);
@@ -25,9 +25,9 @@ public class PatronController
         return false;
     }
 
-    public void DeletePatron(string patronId)
+    public void DeletePatron(string memberShipNumber)
     {
-        patronManager.Delete(patronId);
+        patronManager.Delete(memberShipNumber);
     }
 
     public void ListPatrons()

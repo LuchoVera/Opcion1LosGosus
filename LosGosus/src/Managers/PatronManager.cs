@@ -7,7 +7,7 @@ public class PatronManager : ManagerBase<Patron, string>
         patronSearcher = new PatronSearcher(items);
     }
 
-    public void ShowPatronByMembershipNumber(string membershipNumber) 
+    public void ShowPatronByMembershipNumber(string membershipNumber)
     {
         if (patronSearcher != null)
         {
@@ -16,7 +16,7 @@ public class PatronManager : ManagerBase<Patron, string>
         }
     }
 
-    public void ShowPatronByName(string name) 
+    public void ShowPatronByName(string name)
     {
         if (patronSearcher != null)
         {
