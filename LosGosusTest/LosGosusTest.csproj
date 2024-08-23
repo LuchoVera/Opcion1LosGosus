@@ -19,5 +19,9 @@
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LosGosus\Opcion1LosGosus.csproj" />
+  </ItemGroup>
+
 
 </Project>
