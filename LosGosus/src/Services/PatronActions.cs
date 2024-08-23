@@ -32,9 +32,9 @@ public class PatronActions
         }
 
         BorrowingRecord record = new BorrowingRecord(patron, book, DateTime.Now, DateTime.Now.AddDays(maxBorrowDays));
-        borrowingManager.AddBorrowingRecord(record);
-        patron.AddBorrowingRecord(record);
-        book.Borrow();
+        borrowingManager.Add(record);
+        patron.BorrowingRecords.Add(record);
+        book.IsBorrowed = !book.IsReserved || book.IsBorrowed;
         Console.WriteLine("Book borrowed successfully.");
     }
 
@@ -56,10 +56,11 @@ public class PatronActions
             return;
         }
 
-        record.ReturnBook(DateTime.Now);
+        record.ReturnDate = DateTime.Now;
+        record.BorrowedBook.IsBorrowed = false;
         ReserveVerify(book);
-        book.Return();
-        Console.WriteLine("Book returned successfully. Fine: $" + record.CalculateFine());
+        book.IsBorrowed = false;
+        Console.WriteLine("Book returned successfully. Fine: $" + FineCalculator.CalculateFine(record));
     }
 
     private void ReserveVerify(Book book)
@@ -69,7 +70,7 @@ public class PatronActions
             Reserve? reserve = ReserveManager.FindReserve(book);
             if (reserve != null)
             {
-                book.EndReserve();
+                book.IsReserved = false;
                 BorrowBook(reserve.ReservedBy.MemberShipNumber, book.ISBN);
             }
         }
@@ -93,9 +94,9 @@ public class PatronActions
         }
 
         Reserve reserve = new(patron, book);
-        ReserveManager.AddReserve(reserve);
-        patron.AddReserveRecord(reserve);
-        book.Reserve();
+        ReserveManager.Add(reserve);
+        patron.ReservedRecords.Add(reserve);
+        book.IsReserved = book.IsBorrowed || book.IsReserved;
     }
 
     public void PrintBorrowingHistory(string membershipNumber)
@@ -108,11 +109,11 @@ public class PatronActions
             return;
         }
 
-        List<BorrowingRecord> history = patron.GetBorrowingHistory();
+        List<BorrowingRecord> history = patron.BorrowingRecords;
         foreach (var record in history)
         {
-            Console.WriteLine($"Book: {record.BorrowedBook.Title}, Borrowed on: {record.BorrowDate.ToShortDateString()}, Due on: {record.DueDate.ToShortDateString()}, Returned on: {(record.ReturnDate.HasValue ? record.ReturnDate.Value.ToShortDateString() : "Not returned")}, Fine: ${record.CalculateFine()}");
+            Console.WriteLine($"Book: {record.BorrowedBook.Title}, Borrowed on: {record.BorrowDate.ToShortDateString()}, Due on: {record.DueDate.ToShortDateString()}, Returned on: {(record.ReturnDate.HasValue ? record.ReturnDate.Value.ToShortDateString() : "Not returned")}, Fine: ${FineCalculator.CalculateFine(record)}");
         }
     }
-    
+
 }
