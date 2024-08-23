@@ -1,11 +1,7 @@
 public class ReserveManager : ManagerBase<Reserve, string>
 {
-
-    public void AddReserve(Reserve reserve) {
-        items.Add(reserve);
-    }
-
-    public Reserve? FindReserve(Book book) {
+    public Reserve? FindReserve(Book book)
+    {
         var reserve = items.FindLast(r => r.ReservedBook == book);
         return reserve;
     }

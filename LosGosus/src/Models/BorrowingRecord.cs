@@ -18,7 +18,6 @@ public class BorrowingRecord
     public override string ToString()
     {
         return $"Book: {BorrowedBook.Title}, Borrowed on: {BorrowDate.ToShortDateString()}\n" +
-        $"Due on: {DueDate.ToShortDateString()}, Returned on: {(ReturnDate.HasValue ? ReturnDate.Value.ToShortDateString() : "Not returned")}\n" +
-        $"Fine: ACA TENGO VACIO LEGAL\n";
+        $"Due on: {DueDate.ToShortDateString()}, Returned on: {(ReturnDate.HasValue ? ReturnDate.Value.ToShortDateString() : "Not returned")}\n";
     }
 }
