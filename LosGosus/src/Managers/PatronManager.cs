@@ -1,30 +1,10 @@
-public class PatronManager : IManager<Patron, string> 
+public class PatronManager : ManagerBase<Patron, string>
 {
-    private List<Patron> patrons = new List<Patron>();
     private PatronSearcher? patronSearcher;
 
     public PatronManager()
     {
-        patronSearcher = new PatronSearcher(patrons);
-    }
-    public void Add(Patron patron) 
-    {
-        patrons.Add(patron);
-    }
-
-    public void Update(Patron patron, string patronId) 
-    {
-        patrons[ReturnIndex(patronId)] = patron;
-    }
-
-    public void Delete(string patronId) 
-    {
-        patrons.RemoveAt(ReturnIndex(patronId));
-    }
-
-    public void List() 
-    {
-        Paginator.Paginate<Patron>(patrons);
+        patronSearcher = new PatronSearcher(items);
     }
 
     public void ShowPatronByMembershipNumber(string membershipNumber) 
@@ -45,12 +25,12 @@ public class PatronManager : IManager<Patron, string>
         }
     }
 
-    private int ReturnIndex(string patronId)
+    protected override int ReturnIndex(string membershipNumber)
     {
-        var patron = patrons.Find(x => x.PatronId == patronId);
+        var patron = items.Find(x => x.MemberShipNumber == membershipNumber);
         if (patron != null)
         {
-            return patrons.IndexOf(patron);
+            return items.IndexOf(patron);
         }
         else
         {
@@ -60,11 +40,11 @@ public class PatronManager : IManager<Patron, string>
 
     public Patron? GetPatronByMembershipNumber(string membershipNumber)
     {
-        return patrons.Find(x => x.MemberShipNumber == membershipNumber);
+        return items.Find(x => x.MemberShipNumber == membershipNumber);
     }
     public List<Patron> GetPatrons()
     {
-        return patrons;
+        return items;
     }
 
 }
