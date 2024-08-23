@@ -59,11 +59,10 @@ public class PatronManagerUI
     {
         AnsiConsole.MarkupLine("[bold yellow]Enter Patron Details:[/]");
         string name = AnsiConsole.Ask<string>("Name:");
-        string patronId = Generator.GeneratePRTId();
         string membershipNumber = Generator.GeneratePTRMemberNum();
         string contactDetails = AnsiConsole.Ask<string>("Contact Details:");
 
-        bool success = patronController.TryAddPatron(name, patronId, membershipNumber, contactDetails);
+        bool success = patronController.TryAddPatron(name, membershipNumber, contactDetails);
 
         if (success)
         {
@@ -81,11 +80,10 @@ public class PatronManagerUI
     {
         AnsiConsole.MarkupLine("[bold yellow]Enter Patron Details:[/]");
         string name = AnsiConsole.Ask<string>("Name:");
-        string patronId = AnsiConsole.Ask<string>("Patron ID:");
         string membershipNumber = AnsiConsole.Ask<string>("Membership Number:");
         string contactDetails = AnsiConsole.Ask<string>("Contact Details:");
 
-        bool success = patronController.TryUpdatePatron(name, patronId, membershipNumber, contactDetails);
+        bool success = patronController.TryUpdatePatron(name, membershipNumber, contactDetails);
 
         if (success)
         {
@@ -101,10 +99,10 @@ public class PatronManagerUI
 
     private void DeletePatron()
     {
-        string patronId = AnsiConsole.Ask<string>("Enter Patron MembershipNumber:");
+        string membershipNumber = AnsiConsole.Ask<string>("Enter Patron Membership Number:");
         try
         {
-            patronController.DeletePatron(patronId);
+            patronController.DeletePatron(membershipNumber);
             AnsiConsole.MarkupLine("[green]Patron deleted successfully![/]");
         }
         catch (Exception)
