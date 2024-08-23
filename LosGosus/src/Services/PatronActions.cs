@@ -110,10 +110,12 @@ public class PatronActions
         }
 
         List<BorrowingRecord> history = patron.BorrowingRecords;
-        foreach (var record in history)
-        {
-            Console.WriteLine($"Book: {record.BorrowedBook.Title}, Borrowed on: {record.BorrowDate.ToShortDateString()}, Due on: {record.DueDate.ToShortDateString()}, Returned on: {(record.ReturnDate.HasValue ? record.ReturnDate.Value.ToShortDateString() : "Not returned")}, Fine: ${FineCalculator.CalculateFine(record)}");
-        }
+        Paginator.Paginate<BorrowingRecord>(history, displayFormatter: FormatBorrowingRecord);
+    }
+
+    private string FormatBorrowingRecord(BorrowingRecord record)
+    {
+        return $"Book: {record.BorrowedBook.Title}, Borrowed on: {record.BorrowDate.ToShortDateString()}, Due on: {record.DueDate.ToShortDateString()}, Returned on: {(record.ReturnDate.HasValue ? record.ReturnDate.Value.ToShortDateString() : "Not returned")}, Fine: ${FineCalculator.CalculateFine(record)}";
     }
 
 }
