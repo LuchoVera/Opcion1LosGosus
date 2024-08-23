@@ -70,7 +70,7 @@ public class PatronActions
             if (reserve != null)
             {
                 book.EndReserve();
-                BorrowBook(reserve.ReservedBy.PatronId, book.ISBN);
+                BorrowBook(reserve.ReservedBy.MemberShipNumber, book.ISBN);
             }
         }
     }
