@@ -21,7 +21,7 @@ public class PatronActions
 
         if (book == null || patron == null)
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron ID."));
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron MembershipNumber."));
             return;
         }
 
@@ -70,7 +70,7 @@ public class PatronActions
             if (reserve != null)
             {
                 book.EndReserve();
-                BorrowBook(reserve.ReservedBy.PatronId, book.ISBN);
+                BorrowBook(reserve.ReservedBy.MemberShipNumber, book.ISBN);
             }
         }
     }

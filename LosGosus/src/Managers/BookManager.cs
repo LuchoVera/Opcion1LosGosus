@@ -1,33 +1,12 @@
 using System.Text;
 
-public class BookManager : IManager<Book, string> 
+public class BookManager : ManagerBase<Book, string>
 {
-    private List<Book> books = new List<Book>();
     private BookSearcher? bookSearcher;
 
     public BookManager()
     {
-        bookSearcher = new BookSearcher(books);
-    }
-
-    public void Add(Book book) 
-    {
-        books.Add(book);
-    }
-
-    public void Update(Book book, string isbn) 
-    {
-        books[ReturnIndex(isbn)] = book;
-    }
-
-    public void Delete(string isbn) 
-    {
-        books.RemoveAt(ReturnIndex(isbn));
-    }
-
-    public void List() 
-    {
-        Paginator.Paginate<Book>(books);
+        bookSearcher = new BookSearcher(items);
     }
 
     public void ShowBookByTitle(string title) 
@@ -61,29 +40,29 @@ public class BookManager : IManager<Book, string>
     {
         if(bookSearcher != null)
         {
-            var foundBooks = books.FindAll(x => x.Genre == genre);
+            var foundBooks = items.FindAll(x => x.Genre == genre);
             Paginator.Paginate<Book>(foundBooks);
         }
     }
 
     public Book? GetBookByISBN(string isbn) 
     {
-        return books.Find(x => x.ISBN == isbn);
+        return items.Find(x => x.ISBN == isbn);
     }
-    private int ReturnIndex (string isbn) 
+    protected override int ReturnIndex (string isbn) 
     {
-        Book? book = books.Find(x => x.ISBN == isbn);
-        return book != null ? books.IndexOf(book) : -1;
+        Book? book = items.Find(x => x.ISBN == isbn);
+        return book != null ? items.IndexOf(book) : -1;
     } 
 
     public void ListBorrowedBooks() 
     {
-        var borrowedBooks = books.FindAll(x => x.IsBorrowed);
+        var borrowedBooks = items.FindAll(x => x.IsBorrowed);
         Paginator.Paginate<Book>(borrowedBooks);
     }
     public List<Book> SearchBy(Predicate<Book> predicate)
     {
-        return books.FindAll(predicate);
+        return items.FindAll(predicate);
     }
 
     public string GetCurrentBorrowedBooks()
@@ -101,7 +80,7 @@ public class BookManager : IManager<Book, string>
 
     public List<Book> GetBooks()
     {
-        return books;
+        return items;
     }
     
 
