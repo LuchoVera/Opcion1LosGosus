@@ -1,32 +1,27 @@
-public class BorrowingManager {
-    private List<BorrowingRecord> borrowingRecords;
-
-    public BorrowingManager() {
-        borrowingRecords = new List<BorrowingRecord>();
-    }
+public class BorrowingManager : ManagerBase<BorrowingRecord, string>{
 
     public void AddBorrowingRecord(BorrowingRecord record) {
-        borrowingRecords.Add(record);
+        items.Add(record);
     }
 
     public BorrowingRecord? FindBorrowingRecord(Patron patron, Book book) {
-        var record = borrowingRecords.Find(r => r.BorrowedBook == book && r.BorrowedBy == patron && !r.ReturnDate.HasValue);
+        var record = items.Find(r => r.BorrowedBook == book && r.BorrowedBy == patron && !r.ReturnDate.HasValue);
         return record;
     }
 
     public string GetOverdueBooks()
     {
-        var overdueBooks = borrowingRecords
+        var overdueBooks = items
             .Where(record => record.IsOverdue())
             .Select(record => record.ToString());
 
         return string.Join(Environment.NewLine, overdueBooks);
     }
 
-    public string GetBorrowingHistory(string patronId)
+    public string GetBorrowingHistory(string memberSHipNumber)
     {
-        var history = borrowingRecords
-            .Where(record => record.BorrowedBy.PatronId == patronId)
+        var history = items
+            .Where(record => record.BorrowedBy.MemberShipNumber == memberSHipNumber)
             .Select(record => record.ToString());
 
         return string.Join(Environment.NewLine, history);
@@ -34,6 +29,19 @@ public class BorrowingManager {
 
     public List<BorrowingRecord> GetBorrowingRecords()
     {
-        return borrowingRecords;
+        return items;
+    }
+
+    protected override int ReturnIndex(string code)
+    {
+        var borrowingRecord = items.Find(x => x.BorrowedBy.MemberShipNumber == code);
+        if (borrowingRecord != null)
+        {
+            return items.IndexOf(borrowingRecord);
+        }
+        else
+        {
+            return -1;
+        }
     }
 }

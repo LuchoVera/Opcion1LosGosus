@@ -101,7 +101,7 @@ public class PatronManagerUI
 
     private void DeletePatron()
     {
-        string patronId = AnsiConsole.Ask<string>("Enter Patron ID:");
+        string patronId = AnsiConsole.Ask<string>("Enter Patron MembershipNumber:");
         try
         {
             patronController.DeletePatron(patronId);
