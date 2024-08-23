@@ -14,9 +14,9 @@ public class PatronActions
         ReserveManager = reserveManager;
     }
 
-    public void BorrowBook(string patronId, string bookISBN)
+    public void BorrowBook(string membershipNumber, string bookISBN)
     {
-        Patron? patron = patronManager.GetPatronById(patronId);
+        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
         Book? book = bookManager.GetBookByISBN(bookISBN);
 
         if (book == null || patron == null)
@@ -38,9 +38,9 @@ public class PatronActions
         Console.WriteLine("Book borrowed successfully.");
     }
 
-    public void ReturnBook(string patronId, string bookISBN)
+    public void ReturnBook(string membershipNumber, string bookISBN)
     {
-        Patron? patron = patronManager.GetPatronById(patronId);
+        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
         Book? book = bookManager.GetBookByISBN(bookISBN);
 
         if (book == null || patron == null)
@@ -75,9 +75,9 @@ public class PatronActions
         }
     }
 
-    public void ReserveBook(string patronId, string bookISBN)
+    public void ReserveBook(string membershipNumber, string bookISBN)
     {
-        Patron? patron = patronManager.GetPatronById(patronId);
+        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
         Book? book = bookManager.GetBookByISBN(bookISBN);
 
         if (book == null || patron == null)
@@ -98,9 +98,9 @@ public class PatronActions
         book.Reserve();
     }
 
-    public void PrintBorrowingHistory(string patronId)
+    public void PrintBorrowingHistory(string membershipNumber)
     {
-        Patron? patron = patronManager.GetPatronById(patronId);
+        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
 
         if (patron == null)
         {

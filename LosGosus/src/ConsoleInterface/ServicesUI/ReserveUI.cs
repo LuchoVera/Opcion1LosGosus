@@ -50,9 +50,9 @@ public class ReserveUI
     }
     private void ReserveBook()
     {
-        string patronId = AnsiConsole.Ask<string>("Enter [yellow]Patron ID[/]:");
+        string membershipNumber = AnsiConsole.Ask<string>("Enter [yellow]Membership Number[/]:");
         string bookISBN = AnsiConsole.Ask<string>("Enter [yellow]Book ISBN[/]:");
-        if (!string.IsNullOrEmpty(patronId) && !string.IsNullOrEmpty(bookISBN))
+        if (!string.IsNullOrEmpty(membershipNumber) && !string.IsNullOrEmpty(bookISBN))
         {
             Book? book = _bookManager.GetBookByISBN(bookISBN);
             if (book != null)
@@ -63,7 +63,7 @@ public class ReserveUI
                 }
                 else
                 {
-                    _patronActions.ReserveBook(patronId, bookISBN);
+                    _patronActions.ReserveBook(membershipNumber, bookISBN);
                     AnsiConsole.MarkupLine("[green]Book reserved successfully![/]");
                 }
             }
@@ -74,7 +74,7 @@ public class ReserveUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or patron ID. Please try again"));
+            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or Membership Number. Please try again"));
         }
         Pause();
     }
