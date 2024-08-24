@@ -1,28 +1,13 @@
-public class BookSearcher
+
+public class BookSearcher : ISearch<Book>
 {
-    private List<Book> _books = new List<Book>();
-
-    public BookSearcher(List<Book> books)
+    public List<Book> SearchMultiple(List<Book> items, Func<Book, bool> predicate)
     {
-        _books = books;
+        return items.Where(predicate).ToList();
     }
 
-    public List<Book> SearchByTitle(string title)
+    public Book? SearchSingle(List<Book> items, Func<Book, bool> predicate)
     {
-        return SearchBy(x => x.Title == title);
-    }
-    public List<Book> SearchByAuthor(string author)
-    {
-        return SearchBy(x => x.Author == author);
-    }
-    public Book? SearchByISBN(string isbn)
-    {
-        var book = _books.Find(x => x.ISBN == isbn);
-        return book;
-    }
-
-    public List<Book> SearchBy(Predicate<Book> predicate)
-    {
-        return _books.FindAll(predicate);
+        return items.FirstOrDefault(predicate);
     }
 }

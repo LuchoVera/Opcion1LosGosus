@@ -1,30 +1,13 @@
-public class PatronSearcher
+
+public class PatronSearcher : ISearch<Patron>
 {
-    private List<Patron> _patrons = new List<Patron>();
-    
-    public PatronSearcher(List<Patron> patrons)
+    public List<Patron> SearchMultiple(List<Patron> items, Func<Patron, bool> predicate)
     {
-        _patrons = patrons;
+        return items.Where(predicate).ToList();
     }
 
-    public List<Patron> SearchByName(string name)
+    public Patron? SearchSingle(List<Patron> items, Func<Patron, bool> predicate)
     {
-        return SearchBy(x => x.Name == name);
+        return items.FirstOrDefault(predicate);
     }
-    public Patron? SearchByMemberShipNumber(string mememberShipNumber)
-    { 
-        var patron = _patrons.Find(x => x.MemberShipNumber == mememberShipNumber);
-        if (patron == null)
-        {
-            ErrorHandler.HandleError(new InvalidPatronException("Patron not found"));
-            return patron;
-        }
-        return patron;
-
-    }
-
-    public List<Patron> SearchBy(Predicate<Patron> predicate)
-    {
-        return _patrons.FindAll(predicate);
-    }    
 }

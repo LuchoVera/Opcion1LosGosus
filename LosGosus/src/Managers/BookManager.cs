@@ -2,18 +2,18 @@ using System.Text;
 
 public class BookManager : ManagerBase<Book, string>
 {
-    private BookSearcher? bookSearcher;
+    private Searcher<Book> bookSearcher;
 
     public BookManager()
     {
-        bookSearcher = new BookSearcher(items);
+        bookSearcher = new Searcher<Book>(new BookSearcher());
     }
 
     public void ShowBookByTitle(string title) 
     {
         if(bookSearcher != null)
         {
-            var books = bookSearcher.SearchByTitle(title);
+            var books = SearchBooks(book => book.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
             Paginator.Paginate<Book>(books);
         }
     }
@@ -22,7 +22,7 @@ public class BookManager : ManagerBase<Book, string>
     {
         if(bookSearcher != null)
         {
-            var books = bookSearcher.SearchByAuthor(author);
+            var books = SearchBooks(book => book.Author.Contains(author, StringComparison.OrdinalIgnoreCase));
             Paginator.Paginate<Book>(books);
         }
     }
@@ -31,7 +31,7 @@ public class BookManager : ManagerBase<Book, string>
     {
         if(bookSearcher != null)
         {
-            var book = bookSearcher.SearchByISBN(ISBN);
+            var book = SearchBook(book => book.ISBN.Equals(ISBN, StringComparison.OrdinalIgnoreCase));
             Console.WriteLine(book);
         }
     }
@@ -40,15 +40,21 @@ public class BookManager : ManagerBase<Book, string>
     {
         if(bookSearcher != null)
         {
-            var foundBooks = items.FindAll(x => x.Genre == genre);
+            var foundBooks = SearchBooks(book => book.Genre.Equals(genre, StringComparison.OrdinalIgnoreCase));
             Paginator.Paginate<Book>(foundBooks);
         }
     }
 
-    public Book? GetBookByISBN(string isbn) 
+    public List<Book> SearchBooks(Func<Book, bool> predicate)
     {
-        return items.Find(x => x.ISBN == isbn);
+        return bookSearcher.SearchMultiple(items, predicate);
     }
+
+    public Book? SearchBook(Func<Book, bool> predicate)
+    {
+        return bookSearcher.SearchSingle(items, predicate);
+    }
+
     protected override int ReturnIndex (string isbn) 
     {
         Book? book = items.Find(x => x.ISBN == isbn);
@@ -60,14 +66,10 @@ public class BookManager : ManagerBase<Book, string>
         var borrowedBooks = items.FindAll(x => x.IsBorrowed);
         Paginator.Paginate<Book>(borrowedBooks);
     }
-    public List<Book> SearchBy(Predicate<Book> predicate)
-    {
-        return items.FindAll(predicate);
-    }
 
     public string GetCurrentBorrowedBooks()
     {
-        var borrowedBooks = SearchBy(x => x.IsBorrowed);
+        var borrowedBooks = bookSearcher.SearchMultiple(items, book => book.IsBorrowed);
         var result = new StringBuilder();
 
         foreach (var book in borrowedBooks)
@@ -82,6 +84,4 @@ public class BookManager : ManagerBase<Book, string>
     {
         return items;
     }
-    
-
 }
