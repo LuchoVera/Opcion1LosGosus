@@ -65,4 +65,33 @@ public class BorrowingRecordTests
 
         Assert.Equal(expectedOutput, result);
     }
+
+    [Fact]
+    public void ReturnDate_ShouldBeNull_WhenNotReturned()
+    {
+        Patron patron = new Patron("Carlos Gómez", "ptr-2024040", "Calle Murillo, Santa Cruz");
+        Book book = new Book("Arte Boliviano", "María Flores", "isbn-9988776655", "Art", 2015);
+        DateTime borrowDate = new DateTime(2024, 4, 1);
+        DateTime dueDate = new DateTime(2024, 4, 15);
+        BorrowingRecord record = new BorrowingRecord(patron, book, borrowDate, dueDate);
+
+        Assert.Null(record.ReturnDate);
+    }
+
+    [Fact]
+    public void ToString_ShouldReturnFormattedString_WhenNotReturned()
+    {
+        Patron patron = new Patron("Ana Rodríguez", "ptr-2024050", "Av. 6 de Agosto, El Alto");
+        Book book = new Book("Música Andina", "Carlos Quispe", "isbn-1122334455", "Music", 2008);
+        DateTime borrowDate = new DateTime(2024, 3, 10);
+        DateTime dueDate = new DateTime(2024, 3, 24);
+        BorrowingRecord record = new BorrowingRecord(patron, book, borrowDate, dueDate);
+
+        string expectedOutput = $"Book: Música Andina, Borrowed on: {borrowDate.ToShortDateString()}\n" +
+                                $"Due on: {dueDate.ToShortDateString()}, Returned on: Not returned\n";
+
+        string result = record.ToString();
+
+        Assert.Equal(expectedOutput, result);
+    }
 }
