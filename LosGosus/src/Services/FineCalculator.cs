@@ -17,11 +17,6 @@ public class FineCalculator
             return 0.0;
         }
 
-        if (IsOverdue(record))
-        {
-            return 0.0;
-        }
-
         int overdueDays = (DateTime.Now - record.DueDate).Days;
         return overdueDays * CostPerDay;
     }
