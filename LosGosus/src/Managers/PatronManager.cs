@@ -46,4 +46,9 @@ public class PatronManager : ManagerBase<Patron, string>
         return items;
     }
 
+    public Patron? GetPatronByMembershipNumber(string membershipNumber)
+    {
+        return items.Find(x => x.MemberShipNumber == membershipNumber);
+    }
+
 }
