@@ -25,24 +25,19 @@ public class PatronController
         return false;
     }
 
-    public void DeletePatron(string memberShipNumber)
+    public bool DeletePatron(string memberShipNumber)
     {
+        if (patronManager.GetPatronByMembershipNumber(memberShipNumber) == null)
+        {
+            return false;    
+        }
         patronManager.Delete(memberShipNumber);
+        return true;
     }
 
     public void ListPatrons()
     {
         patronManager.List();
-    }
-
-    public void ShowPatronByMembershipNumber(string membershipNumber)
-    {
-        patronManager.ShowPatronByMembershipNumber(membershipNumber);
-    }
-
-    public void ShowPatronByName(string name)
-    {
-        patronManager.ShowPatronByName(name);
     }
 
     public PatronManager GetPatronManager()
