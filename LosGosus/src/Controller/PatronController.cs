@@ -27,7 +27,8 @@ public class PatronController
 
     public bool DeletePatron(string memberShipNumber)
     {
-        if (patronManager.GetPatronByMembershipNumber(memberShipNumber) == null)
+        if (patronManager.SearchPatron(patron => patron.MemberShipNumber
+        .Equals(memberShipNumber, StringComparison.OrdinalIgnoreCase)) == null)
         {
             return false;    
         }
