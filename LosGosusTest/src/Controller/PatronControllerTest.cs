@@ -4,12 +4,13 @@ public class PatronControllerTest
     public void TryAddPatron_ShouldReturnTrue_WhenValidationSucceeds()
     {
         var controller = new PatronController();
-
+        var memberShipNumber = "ptr-1234567890";
         bool result = controller.TryAddPatron("John Doe", "ptr-1234567890", "john.doe@example.com");
 
         Assert.True(result);
 
-        var addedPatron = controller.GetPatronManager().GetPatronByMembershipNumber("ptr-1234567890");
+        var addedPatron = controller.GetPatronManager().SearchPatron(patron => patron.MemberShipNumber
+        .Equals(memberShipNumber, StringComparison.OrdinalIgnoreCase));
         Assert.NotNull(addedPatron);
         Assert.Equal("John Doe", addedPatron.Name);
         Assert.Equal("john.doe@example.com", addedPatron.ContactDetails);
@@ -29,14 +30,15 @@ public class PatronControllerTest
     public void TryUpdatePatron_ShouldReturnTrue_WhenValidationSucceeds()
     {
         var controller = new PatronController();
-
+        var memberShipNumber = "ptr-1234567890";
         controller.TryAddPatron("John Doe", "ptr-1234567890", "john.doe@example.com");
 
         bool result = controller.TryUpdatePatron("Jane Doe", "ptr-1234567890", "jane.doe@example.com");
 
         Assert.True(result);
 
-        var updatedPatron = controller.GetPatronManager().GetPatronByMembershipNumber("ptr-1234567890");
+        var updatedPatron = controller.GetPatronManager().SearchPatron(patron => patron.MemberShipNumber
+        .Equals(memberShipNumber, StringComparison.OrdinalIgnoreCase));
         Assert.NotNull(updatedPatron);
         Assert.Equal("Jane Doe", updatedPatron.Name);
         Assert.Equal("jane.doe@example.com", updatedPatron.ContactDetails);
@@ -58,14 +60,15 @@ public class PatronControllerTest
     public void DeletePatron_ShouldReturnTrue_WhenPatronIsDeleted()
     {
         var controller = new PatronController();
-
+        var memberShipNumber = "ptr-1234567890";
         controller.TryAddPatron("John Doe", "ptr-1234567890", "john.doe@example.com");
 
         bool result = controller.DeletePatron("ptr-1234567890");
 
         Assert.True(result);
 
-        var deletedPatron = controller.GetPatronManager().GetPatronByMembershipNumber("ptr-1234567890");
+        var deletedPatron = controller.GetPatronManager().SearchPatron(patron => patron.MemberShipNumber
+        .Equals(memberShipNumber, StringComparison.OrdinalIgnoreCase));
         Assert.Null(deletedPatron);
     }
 
