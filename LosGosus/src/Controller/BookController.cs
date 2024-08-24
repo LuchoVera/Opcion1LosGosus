@@ -25,9 +25,15 @@ public class BookController
         return false;
     }
 
-    public void DeleteBook(string isbn)
+    public bool DeleteBook(string isbn)
     {
+        if (bookManager.SearchBook(book => book.ISBN
+            .Equals(isbn, StringComparison.OrdinalIgnoreCase)) == null)
+        {
+            return false;
+        }
         bookManager.Delete(isbn);
+        return true;
     }
 
     public void ListBooks()
