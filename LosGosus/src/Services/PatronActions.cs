@@ -16,8 +16,8 @@ public class PatronActions
 
     public void BorrowBook(string membershipNumber, string bookISBN)
     {
-        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
-        Book? book = bookManager.GetBookByISBN(bookISBN);
+        Patron? patron = patronManager.SearchPatron(patron => patron.MemberShipNumber.Equals(membershipNumber, StringComparison.OrdinalIgnoreCase));
+        Book? book = bookManager.SearchBook(book => book.ISBN.Equals(bookISBN, StringComparison.OrdinalIgnoreCase));
 
         if (book == null || patron == null)
         {
@@ -40,8 +40,8 @@ public class PatronActions
 
     public void ReturnBook(string membershipNumber, string bookISBN)
     {
-        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
-        Book? book = bookManager.GetBookByISBN(bookISBN);
+        Patron? patron = patronManager.SearchPatron(patron => patron.MemberShipNumber.Equals(membershipNumber, StringComparison.OrdinalIgnoreCase));
+        Book? book = bookManager.SearchBook(book => book.ISBN.Equals(bookISBN, StringComparison.OrdinalIgnoreCase));
 
         if (book == null || patron == null)
         {
@@ -78,8 +78,8 @@ public class PatronActions
 
     public void ReserveBook(string membershipNumber, string bookISBN)
     {
-        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
-        Book? book = bookManager.GetBookByISBN(bookISBN);
+        Patron? patron = patronManager.SearchPatron(patron => patron.MemberShipNumber.Equals(membershipNumber, StringComparison.OrdinalIgnoreCase));
+        Book? book = bookManager.SearchBook(book => book.ISBN.Equals(bookISBN, StringComparison.OrdinalIgnoreCase));
 
         if (book == null || patron == null)
         {
@@ -101,7 +101,7 @@ public class PatronActions
 
     public void PrintBorrowingHistory(string membershipNumber)
     {
-        Patron? patron = patronManager.GetPatronByMembershipNumber(membershipNumber);
+        Patron? patron = patronManager.SearchPatron(patron => patron.MemberShipNumber.Equals(membershipNumber, StringComparison.OrdinalIgnoreCase));
 
         if (patron == null)
         {

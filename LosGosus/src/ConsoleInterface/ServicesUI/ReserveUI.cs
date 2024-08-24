@@ -54,7 +54,7 @@ public class ReserveUI
         string bookISBN = AnsiConsole.Ask<string>("Enter [yellow]Book ISBN[/]:");
         if (!string.IsNullOrEmpty(membershipNumber) && !string.IsNullOrEmpty(bookISBN))
         {
-            Book? book = _bookManager.GetBookByISBN(bookISBN);
+            Book? book = _bookManager.SearchBook(book => book.ISBN.Equals(bookISBN, StringComparison.OrdinalIgnoreCase));
             if (book != null)
             {
                 if (!book.IsBorrowed)
@@ -85,7 +85,7 @@ public class ReserveUI
 
         if (!string.IsNullOrEmpty(bookISBN))
         {
-            Book? book = _bookManager.GetBookByISBN(bookISBN);
+            Book? book = _bookManager.SearchBook(book => book.ISBN.Equals(bookISBN, StringComparison.OrdinalIgnoreCase));
             if (book != null && book.IsReserved)
             {
                 AnsiConsole.MarkupLine("[green]The book is reserved.[/]");
