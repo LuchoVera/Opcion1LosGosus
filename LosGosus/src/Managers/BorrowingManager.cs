@@ -1,12 +1,6 @@
 
 public class BorrowingManager : ManagerBase<BorrowingRecord, string>
 {
-    private List<BorrowingRecord> borrowingRecords;
-
-    public BorrowingManager()
-    {
-        borrowingRecords = new List<BorrowingRecord>();
-    }
 
     public BorrowingRecord? FindBorrowingRecord(Patron patron, Book book)
     {
@@ -16,7 +10,7 @@ public class BorrowingManager : ManagerBase<BorrowingRecord, string>
 
     public string GetOverdueBooks()
     {
-        var overdueBooks = borrowingRecords
+        var overdueBooks = items
             .Where(FineCalculator.IsOverdue)
             .Select(record => record.ToString());
 
@@ -25,7 +19,7 @@ public class BorrowingManager : ManagerBase<BorrowingRecord, string>
 
     public string GetBorrowingHistory(string membershipNumber)
     {
-        var history = borrowingRecords
+        var history = items
             .Where(record => record.BorrowedBy.MemberShipNumber == membershipNumber)
             .Select(record => record.ToString());
 
