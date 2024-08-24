@@ -107,8 +107,6 @@ public class BorrowingUI
         {
             ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
         }
-
-        Pause();
     }
 
     private void GenerateReports()
