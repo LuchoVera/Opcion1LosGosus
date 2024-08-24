@@ -27,12 +27,20 @@ public class BookValidator : IValidator<Book>
         return !string.IsNullOrEmpty(value) && value.Length <= maxCharactersLength && value.Length >= minCharactersLength;
     }
 
+    public Dictionary<string, bool> GetValidationResults(Book book) {
+        return new Dictionary<string, bool>
+        {
+            { "Title", ValidateTitle(book.Title) },
+            { "Author", ValidateAuthor(book.Author) },
+            { "ISBN", ValidateISBN(book.ISBN) },
+            { "Genre", ValidateGenre(book.Genre) },
+            { "PublicationYear", ValidatePublicationYear(book.PublicationYear) }
+        };
+    }
+
     public bool Validate(Book book) {
-        return ValidateTitle(book.Title) &&
-               ValidateAuthor(book.Author) &&
-               ValidateISBN(book.ISBN) &&
-               ValidateGenre(book.Genre) &&
-               ValidatePublicationYear(book.PublicationYear);
+        var validationResults = GetValidationResults(book);
+        return validationResults.All(result => result.Value);
     }
 
 }
