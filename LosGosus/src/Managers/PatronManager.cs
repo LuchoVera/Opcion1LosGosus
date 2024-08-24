@@ -1,17 +1,17 @@
 public class PatronManager : ManagerBase<Patron, string>
 {
-    private PatronSearcher? patronSearcher;
+    private Searcher<Patron> patronSearcher;
 
     public PatronManager()
     {
-        patronSearcher = new PatronSearcher(items);
+        patronSearcher = new Searcher<Patron>(new PatronSearcher());
     }
 
     public void ShowPatronByMembershipNumber(string membershipNumber)
     {
         if (patronSearcher != null)
         {
-            var patron = patronSearcher.SearchByMemberShipNumber(membershipNumber);
+            var patron = SearchPatron(patron => patron.MemberShipNumber.Equals(membershipNumber, StringComparison.OrdinalIgnoreCase));
             Console.WriteLine(patron);
         }
     }
@@ -20,28 +20,27 @@ public class PatronManager : ManagerBase<Patron, string>
     {
         if (patronSearcher != null)
         {
-            var patrons = patronSearcher.SearchByName(name);
+            var patrons = SearchPatrons(patron => patron.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
             Paginator.Paginate<Patron>(patrons);
         }
+    }
+
+    public List<Patron> SearchPatrons(Func<Patron, bool> predicate)
+    {
+        return patronSearcher.SearchMultiple(items, predicate);
+    }
+
+    public Patron? SearchPatron(Func<Patron, bool> predicate)
+    {
+        return patronSearcher.SearchSingle(items, predicate);
     }
 
     protected override int ReturnIndex(string membershipNumber)
     {
         var patron = items.Find(x => x.MemberShipNumber == membershipNumber);
-        if (patron != null)
-        {
-            return items.IndexOf(patron);
-        }
-        else
-        {
-            return -1;
-        }
+        return patron != null ? items.IndexOf(patron) : -1;
     }
 
-    public Patron? GetPatronByMembershipNumber(string membershipNumber)
-    {
-        return items.Find(x => x.MemberShipNumber == membershipNumber);
-    }
     public List<Patron> GetPatrons()
     {
         return items;
