@@ -5,6 +5,11 @@
 * Josue Mauricio Prado Camacho
 * Ignacio Ruben Villarroel Rodriguez
 
+## new Members:
+* Alex Paca Meneses
+* Jose Luis Teran Rocha
+* Ronaldo Mendoza Mallcu
+
 ## Development Team Conventions
 
 ### Branch Naming Convention
