@@ -151,8 +151,14 @@ public class BorrowingUI
 
             if (!string.IsNullOrEmpty(membershipNumber))
             {
-                var borrowingHistoryReport = _borrowingManager.GetBorrowingHistory(membershipNumber);
-                File.WriteAllText(Path.Combine(reportsDirectory, $"{membershipNumber}_BorrowingHistory.txt"), borrowingHistoryReport);
+                string borrowingHistoryReport = _borrowingManager.GetBorrowingHistory(membershipNumber);
+                if(!string.IsNullOrEmpty(borrowingHistoryReport))
+                {
+                    File.WriteAllText(Path.Combine(reportsDirectory, $"{membershipNumber}_BorrowingHistory.txt"), borrowingHistoryReport);
+                } else 
+                {
+                    AnsiConsole.MarkupLine("[red]Error generating borrowing history: {0}[/]");
+                }
             }
             else
             {
