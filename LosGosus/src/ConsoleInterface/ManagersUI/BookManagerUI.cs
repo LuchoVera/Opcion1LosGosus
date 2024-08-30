@@ -110,8 +110,13 @@ public class BookManagerUI
         string isbn = AnsiConsole.Ask<string>("Enter ISBN of the book to delete:");
         try
         {
-            bookController.DeleteBook(isbn);
-            AnsiConsole.MarkupLine("[green]Book deleted successfully![/]");
+            if(bookController.DeleteBook(isbn))
+            {
+                AnsiConsole.MarkupLine("[green]Book deleted successfully![/]");
+            }else
+            {
+                AnsiConsole.MarkupLine("[red]Error deleting the book[/]");
+            }
         }
         catch (Exception)
         {

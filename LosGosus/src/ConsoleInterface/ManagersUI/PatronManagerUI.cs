@@ -102,8 +102,14 @@ public class PatronManagerUI
         string membershipNumber = AnsiConsole.Ask<string>("Enter Patron Membership Number:");
         try
         {
-            patronController.DeletePatron(membershipNumber);
-            AnsiConsole.MarkupLine("[green]Patron deleted successfully![/]");
+            if (patronController.DeletePatron(membershipNumber))
+            {
+                AnsiConsole.MarkupLine("[green]Patron deleted successfully![/]");
+            } else
+            {
+                AnsiConsole.MarkupLine("[red]Error deleting the patron![/]");
+
+            }
         }
         catch (Exception)
         {
@@ -116,7 +122,7 @@ public class PatronManagerUI
     {
         AnsiConsole.MarkupLine("[bold yellow]Listing all patrons:[/]");
         patronController.ListPatrons();
-        
+   
     }
 
     private void SearchPatrons()
