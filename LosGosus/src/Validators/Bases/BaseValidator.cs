@@ -30,16 +30,5 @@ public abstract class BaseValidator<T>(int maxCharactersLength, int minCharacter
 
     protected abstract IList<Func<T, bool>> ValidationResults();
 
-    public bool Validate(T item)
-    {
-        foreach (Func<T, bool> rule in ValidationResults())
-        {
-            if (!rule(item))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    public abstract bool Validate(T item);
 }
