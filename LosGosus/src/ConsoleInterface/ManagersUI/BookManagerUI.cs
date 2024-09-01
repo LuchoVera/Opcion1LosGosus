@@ -1,8 +1,8 @@
 using LosGosus.ConsoleInterface.ServicesUI;
 using LosGosus.Controller;
 using LosGosus.Services;
-using LosGosus.Services.ErrorHandler;
 using LosGosus.Services.ErrorHandler.Exceptions;
+using LosGosus.Services.ErrorHandler;
 
 using Spectre.Console;
 
@@ -99,15 +99,21 @@ public class BookManagerUI
         string genre = AnsiConsole.Ask<string>("Genre:");
         int publicationYear = AnsiConsole.Ask<int>("Publication Year:");
 
-        bool success = bookController.TryUpdateBook(title, author, isbn, genre, publicationYear);
-
-        if (success)
+        try
         {
-            AnsiConsole.MarkupLine("[green]Book updated successfully![/]");
-        }
-        else
+            bool success = bookController.TryUpdateBook(title, author, isbn, genre, publicationYear);
+            if (success)
+            {
+                AnsiConsole.MarkupLine("[green]Book updated successfully![/]");
+            }
+            else
+            {
+                Handler.HandleError(new InvalidBookException("Book is not valid. Please check the details and try again."));
+            }
+        } catch 
         {
             Handler.HandleError(new InvalidBookException("Book is not valid. Please check the details and try again."));
+
         }
 
         Pause();

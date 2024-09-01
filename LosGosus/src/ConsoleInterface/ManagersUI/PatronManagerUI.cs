@@ -91,17 +91,21 @@ public class PatronManagerUI
         string membershipNumber = AnsiConsole.Ask<string>("Membership Number:");
         string contactDetails = AnsiConsole.Ask<string>("Contact Details:");
 
-        bool success = patronController.TryUpdatePatron(name, membershipNumber, contactDetails);
-
-        if (success)
+        try
         {
-            AnsiConsole.MarkupLine("[green]Patron updated successfully![/]");
-        }
-        else
+            bool success = patronController.TryUpdatePatron(name, membershipNumber, contactDetails);
+            if (success)
+            {
+                AnsiConsole.MarkupLine("[green]Patron updated successfully![/]");
+            }
+            else
+            {
+                Handler.HandleError(new InvalidPatronException("Invalid Patron information."));
+            }
+        } catch 
         {
             Handler.HandleError(new InvalidPatronException("Invalid Patron information."));
         }
-
         Pause();
     }
 
