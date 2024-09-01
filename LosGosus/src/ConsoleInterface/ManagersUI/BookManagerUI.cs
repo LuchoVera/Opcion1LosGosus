@@ -112,8 +112,8 @@ public class BookManagerUI
             }
         } catch 
         {
-            Handler.HandleError(new InvalidBookException("Book is not valid. Please check the details and try again."));
 
+            Handler.HandleError(new InvalidBookException("Book is not valid or doesn't exists."));
         }
 
         Pause();
