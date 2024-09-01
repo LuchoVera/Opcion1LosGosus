@@ -3,51 +3,36 @@ using System.Text;
 public class BookManager : ManagerBase<Book, string>
 {
     private Searcher<Book> bookSearcher;
+    private ShowContext<Book> show;
 
     public BookManager()
     {
+        show = new ShowContext<Book>();
         bookSearcher = new Searcher<Book>(new BookSearcher());
     }
 
     public void ShowBookByTitle(string title) 
     {
-        if(bookSearcher != null)
-        {
-            var books = SearchBooks(book => book.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
-            Paginator.Paginate<Book>(books);
-        }
+        show.SetShow(new ShowBookByTitle());
+        show.Execute(items, title);
     }
 
     public void ShowBookByAuthor(string author) 
     {
-        if(bookSearcher != null)
-        {
-            var books = SearchBooks(book => book.Author.Contains(author, StringComparison.OrdinalIgnoreCase));
-            Paginator.Paginate<Book>(books);
-        }
+        show.SetShow(new ShowBookByAuthor());
+        show.Execute(items, author);
     }
 
     public void ShowBookByISBN(string ISBN) 
     {
-        if(bookSearcher != null)
-        {
-            var book = SearchBook(book => book.ISBN.Equals(ISBN, StringComparison.OrdinalIgnoreCase));
-            Console.WriteLine(book);
-        }
+        show.SetShow(new ShowBookByISBN());
+        show.Execute(items, ISBN);
     }
 
     public void ListBooksByGenre(string genre) 
     {
-        if(bookSearcher != null)
-        {
-            var foundBooks = SearchBooks(book => book.Genre.Equals(genre, StringComparison.OrdinalIgnoreCase));
-            Paginator.Paginate<Book>(foundBooks);
-        }
-    }
-
-    public List<Book> SearchBooks(Func<Book, bool> predicate)
-    {
-        return bookSearcher.SearchMultiple(items, predicate);
+        show.SetShow(new ShowBookByGenre());
+        show.Execute(items, genre);
     }
 
     public Book? SearchBook(Func<Book, bool> predicate)
@@ -60,12 +45,6 @@ public class BookManager : ManagerBase<Book, string>
         Book? book = items.Find(x => x.ISBN == isbn);
         return book != null ? items.IndexOf(book) : -1;
     } 
-
-    public void ListBorrowedBooks() 
-    {
-        var borrowedBooks = items.FindAll(x => x.IsBorrowed);
-        Paginator.Paginate<Book>(borrowedBooks);
-    }
 
     public string GetCurrentBorrowedBooks()
     {

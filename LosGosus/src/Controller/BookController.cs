@@ -41,21 +41,6 @@ public class BookController
         bookManager.List();
     }
 
-    public void ShowBookByTitle(string title)
-    {
-        bookManager.ShowBookByTitle(title);
-    }
-
-    public void ShowBookByAuthor(string author)
-    {
-        bookManager.ShowBookByAuthor(author);
-    }
-
-    public void ShowBookByISBN(string isbn)
-    {
-        bookManager.ShowBookByISBN(isbn);
-    }
-
     public void ListBooksByGenre(string genre)
     {
         bookManager.ListBooksByGenre(genre);
