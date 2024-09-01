@@ -1,5 +1,13 @@
 using System.Text;
 
+using LosGosus.AbstractClass;
+using LosGosus.Managers.Show;
+using LosGosus.Managers.Show.ShowBook;
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosus.Managers;
+
 public class BookManager : ManagerBase<Book, string>
 {
     private Searcher<Book> bookSearcher;

@@ -1,3 +1,9 @@
+using LosGosus.Managers;
+using LosGosus.Models;
+using LosGosus.Validators.Concretes;
+
+namespace LosGosus.Controller;
+
 public class PatronController
 {
     private PatronManager patronManager = new PatronManager();

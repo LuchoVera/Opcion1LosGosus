@@ -1,7 +1,8 @@
-using Xunit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using LosGosus.Managers;
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosusTest.Searchers;
 
 public class PatronSearcherTests
 {

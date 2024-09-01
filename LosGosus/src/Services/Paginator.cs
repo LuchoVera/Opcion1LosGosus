@@ -1,5 +1,7 @@
 using Spectre.Console;
 
+namespace LosGosus.Services;
+
 public static class Paginator
 {
     public static void Paginate<T>(List<T> items, int pageSize = 5, Func<T, string>? displayFormatter = null)

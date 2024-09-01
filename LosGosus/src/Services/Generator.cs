@@ -1,3 +1,5 @@
+namespace LosGosus.Services;
+
 public class Generator
 {
     private static uint ISBN = 1000000000;

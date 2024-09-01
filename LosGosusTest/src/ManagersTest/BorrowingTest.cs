@@ -1,3 +1,8 @@
+using LosGosus.Managers;
+using LosGosus.Models;
+
+namespace LosGosusTest.ManagersTest;
+
 public class BorrowingManagerTests
 {
     [Fact]

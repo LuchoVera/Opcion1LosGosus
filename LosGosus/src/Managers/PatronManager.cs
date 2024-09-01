@@ -1,3 +1,11 @@
+using LosGosus.AbstractClass;
+using LosGosus.Managers.Show;
+using LosGosus.Managers.Show.ShowPatron;
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosus.Managers;
+
 public class PatronManager : ManagerBase<Patron, string>
 {
     private Searcher<Patron> patronSearcher;

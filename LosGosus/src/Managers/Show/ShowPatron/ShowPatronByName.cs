@@ -1,3 +1,8 @@
+using LosGosus.Managers.Show;
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosus.Managers.Show.ShowPatron;
 
 public class ShowPatronByName : IShow<Patron>
 {

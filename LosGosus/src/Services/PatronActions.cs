@@ -1,3 +1,10 @@
+using LosGosus.Managers;
+using LosGosus.Models;
+using LosGosus.Services.ErrorHandler;
+using LosGosus.Services.ErrorHandler.Exceptions;
+
+namespace LosGosus.Services;
+
 public class PatronActions
 {
     private BorrowingManager borrowingManager;
@@ -21,13 +28,13 @@ public class PatronActions
 
         if (book == null || patron == null)
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron MembershipNumber."));
+            Handler.HandleError(new InvalidInputException("Invalid book or patron MembershipNumber."));
             return;
         }
 
         if (book.IsBorrowed)
         {
-            ErrorHandler.HandleError(new InvalidBookException("The book is already borrowed."));
+            Handler.HandleError(new InvalidBookException("The book is already borrowed."));
             return;
         }
 
@@ -45,7 +52,7 @@ public class PatronActions
 
         if (book == null || patron == null)
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron ID."));
+            Handler.HandleError(new InvalidInputException("Invalid book or patron ID."));
             return;
         }
 
@@ -105,7 +112,7 @@ public class PatronActions
 
         if (patron == null)
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book or patron ID."));
+            Handler.HandleError(new InvalidInputException("Invalid book or patron ID."));
             return;
         }
 

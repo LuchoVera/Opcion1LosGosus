@@ -1,4 +1,11 @@
+using LosGosus.Managers;
+using LosGosus.Services;
+using LosGosus.Services.ErrorHandler;
+using LosGosus.Services.ErrorHandler.Exceptions;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface.ServicesUI;
 
 public class BorrowingUI
 {
@@ -55,7 +62,7 @@ public class BorrowingUI
                 case "0. Go back":
                     return;
                 default:
-                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
+                    Handler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -72,7 +79,7 @@ public class BorrowingUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or Patron MembershipNumber. Please try again."));
+            Handler.HandleError(new InvalidInputException("Invalid book ISBN or Patron MembershipNumber. Please try again."));
         }
 
         Pause();
@@ -89,7 +96,7 @@ public class BorrowingUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or Patron MembershipNumber. Please try again."));
+            Handler.HandleError(new InvalidInputException("Invalid book ISBN or Patron MembershipNumber. Please try again."));
         }
 
         Pause();
@@ -105,7 +112,7 @@ public class BorrowingUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
+            Handler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
         }
     }
 
@@ -131,7 +138,7 @@ public class BorrowingUI
         catch (Exception ex)
         {
             AnsiConsole.MarkupLine("[red]Error generating reports: {0}[/]");
-            ErrorHandler.HandleError(ex);
+            Handler.HandleError(ex);
         }
         Pause();
     }
@@ -162,13 +169,13 @@ public class BorrowingUI
             }
             else
             {
-                ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
+                Handler.HandleError(new InvalidPatronException("Invalid Patron MembershipNumber. Please try again."));
             }
         }
         catch (Exception ex)
         {
             AnsiConsole.MarkupLine("[red]Error generating reports: {0}[/]");
-            ErrorHandler.HandleError(ex);
+            Handler.HandleError(ex);
         }
         Pause();
     }

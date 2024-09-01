@@ -1,3 +1,7 @@
+using LosGosus.Interfaces;
+using LosGosus.Models;
+
+namespace LosGosus.Services;
 
 public class BookSearcher : ISearch<Book>
 {

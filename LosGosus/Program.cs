@@ -1,2 +1,4 @@
-﻿MainMenuUI mainMenuUI = new MainMenuUI();
+﻿using LosGosus.ConsoleInterface;
+
+MainMenuUI mainMenuUI = new MainMenuUI();
 mainMenuUI.Run();

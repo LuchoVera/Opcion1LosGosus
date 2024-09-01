@@ -1,3 +1,8 @@
+using LosGosus.AbstractClass;
+using LosGosus.Models;
+
+namespace LosGosus.Managers;
+
 public class ReserveManager : ManagerBase<Reserve, string>
 {
     public Reserve? FindReserve(Book book)

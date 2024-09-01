@@ -1,3 +1,9 @@
+using LosGosus.Managers;
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosusTest.Services;
+
 public class LibraryStatisticsTests
 {
     private readonly LibraryStatistics _libraryStatistics;

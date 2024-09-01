@@ -1,3 +1,8 @@
+using LosGosus.Interfaces;
+using LosGosus.Services;
+
+namespace LosGosus.AbstractClass;
+
 public abstract class ManagerBase<T, C> : IManager<T, C>
 {
     protected List<T> items = new List<T>();

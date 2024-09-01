@@ -1,3 +1,5 @@
+namespace LosGosus.Models;
+
 public class BorrowingRecord
 {
     public Patron BorrowedBy { get; private set; }

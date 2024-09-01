@@ -1,3 +1,7 @@
+using LosGosus.Models;
+
+namespace LosGosus.Services;
+
 public class FineCalculator
 {
     private const double CostPerDay = 0.5;

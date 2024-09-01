@@ -1,4 +1,10 @@
+using LosGosus.Managers;
+using LosGosus.Services.ErrorHandler;
+using LosGosus.Services.ErrorHandler.Exceptions;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface.ServicesUI;
 
 public class BookSearcherUI
 {
@@ -39,7 +45,7 @@ public class BookSearcherUI
                 case "0. Go back":
                     return;
                 default:
-                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
+                    Handler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -54,7 +60,7 @@ public class BookSearcherUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Title cannot be empty."));
+            Handler.HandleError(new InvalidInputException("Title cannot be empty."));
         }
         
     }
@@ -68,7 +74,7 @@ public class BookSearcherUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Author cannot be empty."));
+            Handler.HandleError(new InvalidInputException("Author cannot be empty."));
         }
         
     }
@@ -82,7 +88,7 @@ public class BookSearcherUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("ISBN cannot be empty."));
+            Handler.HandleError(new InvalidInputException("ISBN cannot be empty."));
         }
         Pause();
     }

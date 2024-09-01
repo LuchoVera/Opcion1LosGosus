@@ -1,3 +1,5 @@
+namespace LosGosus.Services.ErrorHandler.Exceptions;
+
 public class InvalidBookException : Exception
 {
     public InvalidBookException() {}

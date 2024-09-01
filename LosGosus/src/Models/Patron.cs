@@ -1,3 +1,5 @@
+namespace LosGosus.Models;
+
 public class Patron {
     public string Name { get; private set; }
     public string MemberShipNumber { get; private set; }

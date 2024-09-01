@@ -1,3 +1,9 @@
+using LosGosus.Managers;
+using LosGosus.Models;
+using LosGosus.Validators.Concretes;
+
+namespace LosGosus.Controller;
+
 public class BookController
 {
     private BookManager bookManager = new BookManager();

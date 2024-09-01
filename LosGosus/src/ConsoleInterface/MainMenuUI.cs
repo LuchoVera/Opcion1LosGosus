@@ -1,4 +1,12 @@
+using LosGosus.ConsoleInterface.ManagersUI;
+using LosGosus.ConsoleInterface.ServicesUI;
+using LosGosus.Controller;
+using LosGosus.Managers;
+using LosGosus.Services;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface;
 
 public class MainMenuUI
 {

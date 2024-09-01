@@ -1,4 +1,12 @@
+using LosGosus.ConsoleInterface.ServicesUI;
+using LosGosus.Controller;
+using LosGosus.Services;
+using LosGosus.Services.ErrorHandler;
+using LosGosus.Services.ErrorHandler.Exceptions;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface.ManagersUI;
 
 public class PatronManagerUI
 {
@@ -70,7 +78,7 @@ public class PatronManagerUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidPatronException("Patron is not valid. Please check the information and try again."));
+            Handler.HandleError(new InvalidPatronException("Patron is not valid. Please check the information and try again."));
         }
 
         Pause();
@@ -91,7 +99,7 @@ public class PatronManagerUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidPatronException("Invalid Patron information."));
+            Handler.HandleError(new InvalidPatronException("Invalid Patron information."));
         }
 
         Pause();
@@ -113,7 +121,7 @@ public class PatronManagerUI
         }
         catch (Exception)
         {
-            ErrorHandler.HandleError(new InvalidPatronException("Error deleting the patron"));
+            Handler.HandleError(new InvalidPatronException("Error deleting the patron"));
         }
         Pause();
     }

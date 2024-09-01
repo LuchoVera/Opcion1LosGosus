@@ -1,3 +1,8 @@
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosusTest.Services;
+
 public class FineCalculatorTest
 {
     // BorrowingRecord borrowing = new BorrowingRecord(patron, book, DateTime.Now, DateTime.Now.AddDays(3));

@@ -1,3 +1,8 @@
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosus.Managers.Show.ShowBook;
+
 public class ShowBookByAuthor : IShow<Book>
 {
     private Searcher<Book> bookSearcher;

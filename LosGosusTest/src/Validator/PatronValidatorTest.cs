@@ -1,3 +1,8 @@
+using LosGosus.Models;
+using LosGosus.Validators.Concretes;
+
+namespace LosGosusTest.Validator;
+
 public class PatronValidatorTests
 {
     private readonly PatronValidator _validator;
