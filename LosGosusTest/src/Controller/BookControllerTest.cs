@@ -80,6 +80,27 @@ public class BookControllerTests
 
         Assert.False(result);
     }
+    
+    [Fact]
+    public void TryUpdateBook_InvalidBookGenre_ReturnsFalse()
+    {
+        string title = "Test Book";
+        string author = "Test Author";
+        string isbn = "isbn-1000000000";
+        string genre = "Fiction";
+        int publicationYear = 2023;
+
+        _bookController.TryAddBook(title, author, isbn, genre, publicationYear);
+
+        string newTitle = "Updated Book";
+        string newAuthor = "Updated Author";
+        string newGenre = "Non--Fiction";
+        int newPublicationYear = 2020;
+
+        bool result = _bookController.TryUpdateBook(newTitle, newAuthor, isbn, newGenre, newPublicationYear);
+
+        Assert.False(result);
+    }
 
     [Fact]
     public void DeleteBook_ExistingBook_ReturnsTrue()
