@@ -1,0 +1,83 @@
+@startuml User Interface
+
+package "UI Components" {
+    
+    class BookSearcherUI {
+        - patronManager : PatronManager
+
+        + Run() : void
+        + SearchByTitle() : void
+        + SearchByAuthor() : void
+        + SearchByISBN() : void
+        + Pause() : void
+    }
+
+    class PatronSearcherUI {
+        - patronManager : PatronManager
+
+        + Run() : void
+        + SearchByName() : void
+        + SearchByMemberShipNumber() : void
+        + Pause() : void
+    }
+
+    class BookManagerUI {
+        - bookController : BookController
+        - bookSearcherUI : BookSearcherUI
+
+        + Run() : void
+        + AddBook() : void
+        + UpdateBook() : void
+        + DeleteBook() : void
+        + ListBooks() : void
+        + ListBooksByGenre() : void
+        + SearchBooks() : void
+        + Pause() : void
+    }
+
+    class PatronManagerUI {
+        - patronController : PatronController
+        - patronSearcherUI : PatronSearcherUI
+
+        + Run() : void
+        + AddPatron() : void
+        + UpdatePatron() : void
+        + DeletePatron() : void
+        + ListPatrons() : void
+        + SearchPatrons() : void
+        + Pause() : void
+    }
+
+    class ReserveUI {
+        - _borrowingManager : BorrowingManager
+        - _patronManager : PatronManager
+        - _bookManager : BookManager
+        - _reserveManager : ReserveManager
+        - patronActions : PatronActions
+
+        + Run()  : void
+        + BorrowBook(PatronActions) : void
+        + ReturnBook(PatronActions) : void
+        + PrintBorrowingHistory(PatronActions) : void
+        + GenerateReports() : void
+        + GeneratePatronReport() : void
+        + Pause() : void
+    }
+
+    class BorrowingUI {
+        - _borrowingManager : BorrowingManager
+        - _patronManager : PatronManager
+        - _bookManager : BookManager
+        - patronActions : PatronActions
+
+        + Run() : void
+        + BorrowBook(PatronActions) : void
+        + ReturnBook(PatronActions) : void
+        + PrintBorrowingHistory(PatronActions) : void
+        + GenerateReports() : void
+        + GeneratePatronReport() : void
+        + Pause() : void
+    }
+}
+
+@enduml
