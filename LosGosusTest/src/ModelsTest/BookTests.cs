@@ -1,3 +1,7 @@
+using LosGosus.Models;
+
+namespace LosGosusTest.ModelsTest;
+
 public class BookTests
 {
     [Fact]

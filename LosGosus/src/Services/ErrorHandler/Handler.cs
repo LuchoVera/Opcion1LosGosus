@@ -1,6 +1,8 @@
 using Spectre.Console;
 
-public class ErrorHandler
+namespace LosGosus.Services.ErrorHandler;
+
+public class Handler
 {
     public static void HandleError(Exception exception)
     {

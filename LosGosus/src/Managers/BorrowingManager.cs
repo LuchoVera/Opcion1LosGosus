@@ -1,3 +1,8 @@
+using LosGosus.AbstractClass;
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosus.Managers;
 
 public class BorrowingManager : ManagerBase<BorrowingRecord, string>
 {

@@ -1,3 +1,5 @@
+namespace LosGosus.Models;
+
 public class Book {
     public string Title { get; private set; }
     public string Author { get; private set; }

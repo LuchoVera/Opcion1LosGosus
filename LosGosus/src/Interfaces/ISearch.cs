@@ -1,3 +1,5 @@
+namespace LosGosus.Interfaces;
+
 public interface ISearch<T>
 {
     List<T> SearchMultiple(List<T> items, Func<T, bool> predicate);

@@ -1,3 +1,8 @@
+using LosGosus.Models;
+using LosGosus.Validators.Bases;
+
+namespace LosGosus.Validators.Concretes;
+
 public sealed class PatronValidator() : BaseValidator<Patron>(50)
 {
     private bool ValidateName(string name)

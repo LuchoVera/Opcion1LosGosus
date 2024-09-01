@@ -1,3 +1,8 @@
+using LosGosus.Models;
+using LosGosus.Validators.Bases;
+
+namespace LosGosus.Validators.Concretes;
+
 public sealed class BookValidator() : BaseValidator<Book>(100)
 {
 

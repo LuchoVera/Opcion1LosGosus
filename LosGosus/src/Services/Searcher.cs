@@ -1,3 +1,7 @@
+using LosGosus.Interfaces;
+
+namespace LosGosus.Services;
+
 public class Searcher<T>
 {
     private ISearch<T> _searchStrategy;

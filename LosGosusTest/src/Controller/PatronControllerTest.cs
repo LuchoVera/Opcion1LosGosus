@@ -1,3 +1,7 @@
+using LosGosus.Controller;
+
+namespace LosGosusTest.Controller;
+
 public class PatronControllerTest
 {
     [Fact]

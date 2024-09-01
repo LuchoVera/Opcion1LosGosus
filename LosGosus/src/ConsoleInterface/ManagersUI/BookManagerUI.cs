@@ -1,4 +1,12 @@
+using LosGosus.ConsoleInterface.ServicesUI;
+using LosGosus.Controller;
+using LosGosus.Services;
+using LosGosus.Services.ErrorHandler;
+using LosGosus.Services.ErrorHandler.Exceptions;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface.ManagersUI;
 
 public class BookManagerUI
 {
@@ -76,7 +84,7 @@ public class BookManagerUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidBookException("Invalid Book Information"));
+            Handler.HandleError(new InvalidBookException("Invalid Book Information"));
         }
 
         Pause();
@@ -99,7 +107,7 @@ public class BookManagerUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidBookException("Book is not valid. Please check the details and try again."));
+            Handler.HandleError(new InvalidBookException("Book is not valid. Please check the details and try again."));
         }
 
         Pause();
@@ -120,7 +128,7 @@ public class BookManagerUI
         }
         catch (Exception)
         {
-            ErrorHandler.HandleError(new InvalidBookException("Error deleting the book"));
+            Handler.HandleError(new InvalidBookException("Error deleting the book"));
         }
         Pause();
     }

@@ -1,3 +1,5 @@
+namespace LosGosus.Managers.Show;
+
 public class ShowContext<T> 
 {
     IShow<T>? show;

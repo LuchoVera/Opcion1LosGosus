@@ -1,4 +1,12 @@
+using LosGosus.Managers;
+using LosGosus.Models;
+using LosGosus.Services;
+using LosGosus.Services.ErrorHandler;
+using LosGosus.Services.ErrorHandler.Exceptions;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface.ServicesUI;
 
 public class ReserveUI
 {
@@ -43,7 +51,7 @@ public class ReserveUI
                 case "3. Go back":
                     return;
                 default:
-                    ErrorHandler.HandleError(new InvalidInputException("Invalid option. Please try again."));
+                    Handler.HandleError(new InvalidInputException("Invalid option. Please try again."));
                     break;
             }
         }
@@ -69,12 +77,12 @@ public class ReserveUI
             }
             else
             {
-                ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN. Please try again"));
+                Handler.HandleError(new InvalidInputException("Invalid book ISBN. Please try again"));
             }
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN or Membership Number. Please try again"));
+            Handler.HandleError(new InvalidInputException("Invalid book ISBN or Membership Number. Please try again"));
         }
         Pause();
     }
@@ -97,7 +105,7 @@ public class ReserveUI
         }
         else
         {
-            ErrorHandler.HandleError(new InvalidInputException("Invalid book ISBN. Please try again"));
+            Handler.HandleError(new InvalidInputException("Invalid book ISBN. Please try again"));
 
 
         }

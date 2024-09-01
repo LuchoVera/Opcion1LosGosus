@@ -1,3 +1,7 @@
+using LosGosus.Validators.Interfaces;
+
+namespace LosGosus.Validators.Bases;
+
 public abstract class BaseValidator<T>(int maxCharactersLength, int minCharactersLength = 1)
     : IValidator<T>
 {

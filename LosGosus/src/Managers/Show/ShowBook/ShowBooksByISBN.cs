@@ -1,3 +1,7 @@
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosus.Managers.Show.ShowBook;
 
 public class ShowBookByISBN : IShow<Book>
 {

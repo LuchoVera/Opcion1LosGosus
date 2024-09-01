@@ -1,4 +1,8 @@
+using LosGosus.Services;
+
 using Spectre.Console;
+
+namespace LosGosus.ConsoleInterface.ServicesUI;
 
 public class StatisticsUI
 {

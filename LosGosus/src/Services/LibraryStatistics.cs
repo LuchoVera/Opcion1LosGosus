@@ -1,3 +1,7 @@
+using LosGosus.Managers;
+
+namespace LosGosus.Services;
+
 public class LibraryStatistics
 {
     private BookManager bookManager;

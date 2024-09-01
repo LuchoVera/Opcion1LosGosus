@@ -1,3 +1,8 @@
+using LosGosus.Models;
+using LosGosus.Services;
+
+namespace LosGosusTest.Searchers;
+
 public class BookSearcherTests
 {
     private readonly BookSearcher _searcher;
