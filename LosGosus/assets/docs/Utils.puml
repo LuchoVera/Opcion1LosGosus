@@ -1,0 +1,17 @@
+@startuml Utils
+
+package Utils {
+
+    class Generator {
+        - ISBN : uint
+        - MembershipNumber  : uint
+        - PatronId : uint
+        - maxBorrowDays : int
+
+        + GenerateISBN() : string
+        + GeneratePTRMemberNum() : string
+        + GeneratePRTId() : string
+    }
+}
+
+@enduml

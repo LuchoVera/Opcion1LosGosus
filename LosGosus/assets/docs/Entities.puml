@@ -1,0 +1,42 @@
+@startuml Models
+
+package "Entities" {
+
+    class Book {
+        + Title : string
+        + Author : string
+        + ISBN : string
+        + Genre : string
+        + PublicationYear : int
+        + IsBorrow : boolean
+        + ReservedBy : Patron
+
+        + Borrow() : void
+        + Return() : void
+    }
+
+    class Patron {
+        + Name : string
+        + PatronId : int
+        + MembeshipNumber : int
+        + ContactDetails : int
+        + BorrowingRecords : List<BorrowingRecord>
+
+        + AddBorrowingRecord(BorrowingRecord record) : void
+        + GetBorrowingHistory() : List<BorrowingRecord> 
+    }
+
+    class BorrowingRecord {
+        + BorrowedBy : Patron
+        + BorrowedBook : Book
+        + BorrowDate : DateTime
+        + DueDate : DateTime
+        + ReturnDate : DateTime
+
+        + IsOverdue() : bool
+        + CalculateFine() : double
+        + ReturnBook(DateTime) : void
+    }
+}
+
+@enduml
