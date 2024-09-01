@@ -106,7 +106,7 @@ package "Managers" {
 
 package "Search" {
 
-    class BookSearch {
+    class BookSearcher {
         - _books : List<Book>
 
         + SearchByTitle(string) : List<Book>
@@ -115,7 +115,7 @@ package "Search" {
         + SearchBy(Predicate<Book>) : List<Book>
     }
 
-    class PatronSearch {
+    class PatronSearcher {
         - _patrons : List<Patron>
 
         + SearchByName(string) : List<Patron>

@@ -1,6 +1,6 @@
 @startuml User Interface
 
-package "Components" {
+package "UI Components" {
     
     class BookSearcherUI {
         - patronManager : PatronManager
