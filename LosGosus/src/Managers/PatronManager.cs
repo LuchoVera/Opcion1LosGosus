@@ -1,33 +1,24 @@
 public class PatronManager : ManagerBase<Patron, string>
 {
     private Searcher<Patron> patronSearcher;
+    private ShowContext<Patron> show;
 
     public PatronManager()
     {
+        show = new ShowContext<Patron>();
         patronSearcher = new Searcher<Patron>(new PatronSearcher());
     }
 
     public void ShowPatronByMembershipNumber(string membershipNumber)
     {
-        if (patronSearcher != null)
-        {
-            var patron = SearchPatron(patron => patron.MemberShipNumber.Equals(membershipNumber, StringComparison.OrdinalIgnoreCase));
-            Console.WriteLine(patron);
-        }
+        show.SetShow(new ShowPatronByMembershipNumber());
+        show.Execute(items, membershipNumber);
     }
 
     public void ShowPatronByName(string name)
     {
-        if (patronSearcher != null)
-        {
-            var patrons = SearchPatrons(patron => patron.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
-            Paginator.Paginate<Patron>(patrons);
-        }
-    }
-
-    public List<Patron> SearchPatrons(Func<Patron, bool> predicate)
-    {
-        return patronSearcher.SearchMultiple(items, predicate);
+        show.SetShow(new ShowPatronByName());
+        show.Execute(items, name);
     }
 
     public Patron? SearchPatron(Func<Patron, bool> predicate)
@@ -40,10 +31,4 @@ public class PatronManager : ManagerBase<Patron, string>
         var patron = items.Find(x => x.MemberShipNumber == membershipNumber);
         return patron != null ? items.IndexOf(patron) : -1;
     }
-
-    public List<Patron> GetPatrons()
-    {
-        return items;
-    }
-
 }
