@@ -1,0 +1,57 @@
+@startuml App
+
+package Program {
+    !include Entities.puml
+    !include Contracts.puml
+    !include Concretes.puml
+    !include UI.puml
+    !include Utils.puml
+    
+    class MainMenuUI {
+        - bookController : BookController
+        - patronController : PatronController
+        - borrowingManager : BorrowingManager
+        - bookManagerUI : BookManagerUI
+        - patronManagerUI : PatronManagerUI
+        - borrowingUI : BorrowingUI
+        - reserveUI :  ReserveUI
+
+        + Run() : void
+        + Pause() : void
+    }
+
+    Book o-- BorrowingRecord
+    Patron o-- BorrowingRecord
+
+    IValidator <|.. BookValidator
+    IValidator <|.. PatronValidator
+
+    IManager <|.. BookManager
+    IManager <|.. PatronManager
+
+    BookController ..> BookValidator 
+    PatronController ..> PatronValidator
+
+    BookManager o-- BookController
+    PatronManager o-- PatronController
+    BorrowingManager o-- PatronActions
+
+    BookSearcher o-- BookManager
+    PatronSearcher o-- PatronManager
+
+    BookManagerUI ..> Generator
+    PatronManagerUI ..> Generator
+
+    BookSearcherUI o.. BookManagerUI
+    PatronSearcherUI o.. PatronManagerUI
+
+    MainMenuUI *-- BookController
+    MainMenuUI *-- PatronController
+    MainMenuUI *-- BorrowingManager
+    MainMenuUI *-- BookManagerUI
+    MainMenuUI *-- PatronManagerUI
+    MainMenuUI *-- BorrowingUI
+    MainMenuUI *-- ReserveUI
+}
+
+@enduml

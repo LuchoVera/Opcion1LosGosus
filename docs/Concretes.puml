@@ -1,0 +1,138 @@
+@startuml Concretes
+
+package "Validators" {
+
+    class BookValidator {
+        - maxCharactersLength : int
+        - minCharactersLength : int
+
+        - ValidateTitle(string) : bool
+        - ValidateAuthor(string) : bool
+        - ValidateISBN(string) : bool
+        - ValidateGenre(string) : bool
+        - ValidatePublicationYear(int) : bool
+        - ValidateNullOrEmpty(string) : bool
+        + Validate(Book) : bool
+    }
+
+    class PatronValidator {
+        - maxCharactersLength : int
+        - minCharactersLength : int
+
+        - ValidateName(string) : bool
+        - ValidatePatronId(string) : bool
+        - ValidateMemberShipNumber(string) : bool
+        - ContactDetails(string) : bool
+        - ValidateNullOrEmpty(string) : bool
+        + Validate(Book) : bool
+    }
+}
+
+package "Controllers" {
+
+    class BookController {
+        - bookManager : BookManager
+        - BookValidator : bookValidator
+
+        + AddBook(string, string, string, string, int) : void 
+        + UpdateBook(string, string, string, string, int) : void
+        + DeleteBook(string) : void
+        + ListBooks() : void
+        + ShowBookByTitle(string) : void
+        + ShowBookByAuthor(string) : void
+        + ShowBookByISBN(string) : void
+        + ListBooksByGenre(string) : void
+        + GetBookManager() : BookManager
+    }
+
+    class PatronController {
+        - patronManager : PatronManager
+        - patronValidator : PatronValidator
+        
+        + AddPatron(string, string, string, string) : void
+        + UpdatePatron(string, string, string, string) : void
+        + DeletePatron(string) : void
+        + ListPatrons() : void
+        + ShowPatronByMembershipNumber(string) : void
+        + ShowPatronByName(string) : void
+        + GetPatronManager() : PatronManager
+    }
+}
+
+package "Managers" {
+
+    class BookManager {
+        - books : List<Book>
+        - bookSearcher : BookSearcher?
+
+        + Add(Book) : void
+        + Update(book, string) : void
+        + Delete(string) : void
+        + List() : void
+        + ShowBookByTitle(string) : void
+        + ShowBookByAuthor(string) : void
+        + ShowBookByISBN(string) : void
+        + ListBooksByGenre(string) : void
+        + GetBookByISBN(string) : Book?
+        - ReturnIndex(string) : int
+        + ListBorrowedBooks() : void
+        + SearchBy(Predicate<Book>) : List<Book>
+        + GetCurrentBorrowedBooks() : string
+    }
+
+    class PatronManager {
+        - patrons : List<Patron>
+        - patronSearcher : PatronSearcher?
+        
+        + Add(patron) : void
+        + Update(patron, string) : void
+        + Delete(string) : void
+        + List() : void
+        + ShowPatronByMembershipNumber(string) : void
+        + ShowPatronByName(string) : void
+        - ReturnIndex(string) : int
+        + GetPatronByID(string) : Patron?
+    }
+
+    class BorrowingManager {
+        - borrowingRecords : List<BorrowingRecord>
+
+        + AddBorrowingRecord(BorrowingRecord) : void
+        + FindBorrowingRecord(Patron, Book) : BorrowingRecord?
+        + GetOverdueBooks() : string
+        + GetBorrowingHistory(string) : string
+    }
+}
+
+package "Search" {
+
+    class BookSearcher {
+        - _books : List<Book>
+
+        + SearchByTitle(string) : List<Book>
+        + SearchByAuthor(string) : List<Book>
+        + SearchByISBN(string) : Book
+        + SearchBy(Predicate<Book>) : List<Book>
+    }
+
+    class PatronSearcher {
+        - _patrons : List<Patron>
+
+        + SearchByName(string) : List<Patron>
+        + SearchByMemberShipNumber(string) : Patron
+        + SearchBy(Predicate<Patron>) : List<Patron>
+    }
+}
+
+class PatronActions {
+    - borrowingManager : BorrowingManager
+    - patronManager : PatronManager
+    - bookManager : BookManager
+    - maxBorrowDays : int
+
+    + BorrowBook(string, string) : void
+    + ReturnBook(string, string) : void
+    + PrintBorrowingHistory(string) : void
+}
+
+@enduml

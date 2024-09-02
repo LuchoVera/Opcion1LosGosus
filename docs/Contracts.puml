@@ -1,0 +1,14 @@
+@startuml Contracts
+
+package "Interfaces" {
+    
+    interface IValidator {
+        ' No related methods
+    }
+
+    interface IManager {
+        ' No related methods
+    }
+}
+
+@enduml
