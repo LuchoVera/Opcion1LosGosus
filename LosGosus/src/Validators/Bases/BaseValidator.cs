@@ -20,7 +20,48 @@ public abstract class BaseValidator<T>(int maxCharactersLength, int minCharacter
 
     protected bool ValidateStringLettersWithSpaces(string value)
     {
-        return value.All(static c => char.IsLetter(c) || char.IsWhiteSpace(c));
+        string content = value.Trim();
+        
+        if (!ContainsOnlyValidCharacters(content))
+        {
+            return false;
+        }
+        
+        if (!AreHyphensCorrectlyPlaced(content))
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
+    private bool ContainsOnlyValidCharacters(string value)
+    {
+        return value.All(static c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '-');
+    }
+    
+    private bool AreHyphensCorrectlyPlaced(string value)
+    {
+        for (int i = 0; i < value.Length; i++)
+        {
+            if (value[i] == '-')
+            {
+                if (i == 0 || i == value.Length - 1)
+                {
+                    return false;
+                }
+                
+                char before = value[i - 1];
+                char after = value[i + 1];
+
+                if (!((char.IsLetter(before) || char.IsWhiteSpace(before)) &&
+                      (char.IsLetter(after) || char.IsWhiteSpace(after))))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     protected bool ValidateYear(int year)
@@ -30,16 +71,5 @@ public abstract class BaseValidator<T>(int maxCharactersLength, int minCharacter
 
     protected abstract IList<Func<T, bool>> ValidationResults();
 
-    public bool Validate(T item)
-    {
-        foreach (Func<T, bool> rule in ValidationResults())
-        {
-            if (!rule(item))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    public abstract bool Validate(T item);
 }

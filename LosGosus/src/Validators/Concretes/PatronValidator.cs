@@ -35,7 +35,7 @@ public sealed class PatronValidator() : BaseValidator<Patron>(50)
         };
     }
 
-    public new bool Validate(Patron patron)
+    public override bool Validate(Patron patron)
     {
         foreach (Func<Patron, bool> rule in ValidationResults())
         {
@@ -46,5 +46,4 @@ public sealed class PatronValidator() : BaseValidator<Patron>(50)
         }
         return true;
     }
-
 }

@@ -51,7 +51,7 @@ public sealed class BookValidator() : BaseValidator<Book>(100)
         };
     }
 
-    public new bool Validate(Book book) {
+    public override bool Validate(Book book) {
         foreach (Func<Book, bool> rule in ValidationResults())
         {
             if (!rule(book))
