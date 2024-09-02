@@ -1,11 +1,11 @@
 using LosGosus.Models;
 using LosGosus.Validators.Concretes;
 
-public class BookValidatorTests
+public class ValidatorBookTests
 {
     private readonly BookValidator _validator = new();
 
-    public BookValidatorTests()
+    public ValidatorBookTests()
     {
         _validator = new BookValidator();
     }
