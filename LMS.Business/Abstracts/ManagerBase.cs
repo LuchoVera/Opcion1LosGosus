@@ -1,4 +1,5 @@
 using LMS.Business.Interfaces;
+using LMS.Business.Services;
 
 namespace LMS.Business.Abstracts;
 
@@ -23,7 +24,7 @@ public abstract class ManagerBase<T, C> : IManager<T, C>
 
     public void List()
     {
-        // Paginator.Paginate<T>(items);
+        Paginator.Paginate<T>(items);
 
     }
 
