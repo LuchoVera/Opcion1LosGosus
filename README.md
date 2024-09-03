@@ -1,14 +1,37 @@
-# Los Gosus - Library Proyect
-## Members:
-* Luis Enrique Espinoza Vera
-* Sebasthian Khristian Salinas Pozzo
-* Josue Mauricio Prado Camacho
-* Ignacio Ruben Villarroel Rodriguez
+# Los Gosus - Library Project
 
-## new Members:
-* Alex Paca Meneses
-* Jose Luis Teran Rocha
-* Ronaldo Mendoza Mallcu
+| Members                             | New Members
+| ---                                 | ---
+| Luis Enrique Espinoza Vera          | Alex Paca Meneses
+| Sebasthian Khristian Salinas Pozzo  | José Luis Terán Rocha
+| Josue Mauricio Prado Camacho        | Ronaldo Mendoza Mallcu
+| Ignacio Ruben Villarroel Rodriguez  |
+
+## Tasks to be worked on:
+
+### Alex Paca Meneses
+| Ticket                                              | Status
+| ---                                                 | ---
+| Bugfix: Delete validation for null books or patrons | **Done**
+| Bugfix: Generation of empty reports                 | **Done**
+| Bugfix: Update non existent Patron or Book          | **Done**
+| Refactor: Book and Patron manager show methods      | **Done**
+| Refactor: Merge validations for same methods        | **Done**
+
+### José Luis Terán
+| Ticket                                              | Status
+| ---                                                 | ---
+| UML: Migrate UML diagram                            | **Done**
+| CI: Implementing C# conventions                     | **Done**
+| CI: Workflows and VS Code Extensions                | **Done**
+| Bugfix: Unit test for controllers                   | **Done**
+| Build: Refactor Project Structure                   | **Done** but not merged
+
+### Ronaldo Mendoza
+| Ticket                                                  | Status
+| ---                                                     | ---
+| Refactor: Application of design pattern in validations  | **Done**
+| Refactor: Update tests for validations                  | **Done**
 
 ## Development Team Conventions
 
@@ -24,6 +47,8 @@ A git branch should start with a category. Choose one of the following:
 - **bugfix**: For fixing a bug.
 - **hotfix**: For changing code with a temporary solution and/or without following the usual process (typically due to an emergency).
 - **test**: For experimenting outside of an issue/ticket.
+- **build**: For changes related to the project compilation.
+- **docs**: For documentation that is modified.
 
 #### Reference
 
@@ -76,6 +101,18 @@ Each statement should start with a verb in the imperative form. Statements shoul
 - `git commit -m 'fix: add the stop directive to button component to prevent propagation'`
 - `git commit -m 'refactor: rewrite button component in TypeScript'`
 - `git commit -m 'chore: write button documentation'`
+
+### CI Workflows - Pipelines
+Having two .yml files for our workflow, which has the next jobs; `build` and `test` to automatize the project, and also `check_commits_convention`, `check_branches_convention` for every **push** to **release** branch and `semantic_pull_request` and `check_commit_messages` for each **PR** that will be opened. Finally, the **pull request template** file so that each PR has a description when it's opened. Furthermore of recommending VS Code extensions for project.
+
+To sum up:
+
+1. On pushes to **release** branch.
+2. On each PR opened.
+
+### C# Conventions
+1. Use of an `.editorconfig` file given a set of rules that improves the `code-style` of the project. Besides of using `dotnet-format` and `dotnet-csharpier`.
+2. A file called `Directory.Build.props` for `code-analysis` in the project.
 
 ### Trello Card Management
 
