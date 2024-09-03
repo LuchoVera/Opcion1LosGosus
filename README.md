@@ -102,6 +102,18 @@ Each statement should start with a verb in the imperative form. Statements shoul
 - `git commit -m 'refactor: rewrite button component in TypeScript'`
 - `git commit -m 'chore: write button documentation'`
 
+### CI Workflows - Pipelines
+Having two .yml files for our workflow, which has the next jobs; `build` and `test` to automatize the project, and also `check_commits_convention`, `check_branches_convention` for every **push** to **release** branch and `semantic_pull_request` and `check_commit_messages` for each **PR** that will be opened. Finally, the **pull request template** file so that each PR has a description when it's opened. Furthermore of recommending VS Code extensions for project.
+
+To sum up:
+
+1. On pushes to **release** branch.
+2. On each PR opened.
+
+### C# Conventions
+1. Use of an `.editorconfig` file given a set of rules that improves the `code-style` of the project. Besides of using `dotnet-format` and `dotnet-csharpier`.
+2. A file called `Directory.Build.props` for `code-analysis` in the project.
+
 ### Trello Card Management
 
 For managing tasks in Trello, we will follow this workflow:
