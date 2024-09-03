@@ -9,7 +9,7 @@
 
 ## Tasks to be worked on:
 
-## Alex Paca Meneses
+### Alex Paca Meneses
 | Ticket                                              | Status
 | ---                                                 | ---
 | Bugfix: Delete validation for null books or patrons | **Done**
@@ -18,7 +18,7 @@
 | Refactor: Book and Patron manager show methods      | **Done**
 | Refactor: Merge validations for same methods        | **Done**
 
-## José Luis Terán
+### José Luis Terán
 | Ticket                                              | Status
 | ---                                                 | ---
 | UML: Migrate UML diagram                            | **Done**
@@ -27,7 +27,7 @@
 | Bugfix: Unit test for controllers                   | **Done**
 | Build: Refactor Project Structure                   | **Done** but not merged
 
-## Ronaldo Mendoza
+### Ronaldo Mendoza
 | Ticket                                                  | Status
 | ---                                                     | ---
 | Refactor: Application of design pattern in validations  | **Done**
@@ -47,6 +47,8 @@ A git branch should start with a category. Choose one of the following:
 - **bugfix**: For fixing a bug.
 - **hotfix**: For changing code with a temporary solution and/or without following the usual process (typically due to an emergency).
 - **test**: For experimenting outside of an issue/ticket.
+- **build**: For changes related to the project compilation.
+- **docs**: For documentation that is modified.
 
 #### Reference
 
