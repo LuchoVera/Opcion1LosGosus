@@ -10,6 +10,25 @@
 * Jose Luis Teran Rocha
 * Ronaldo Mendoza Mallcu
 
+## Tasks to be worked on
+
+## Alex Paca Meneses
+* Bugfix: Delete validation for null books or patrons | status "done"
+* Bugfix: Generation of empty reports | status "done"
+* Bugfix: Update non existent Patron or Book | status "done"
+* Refactor: Book and Patron manager show methods | status "done"
+* Refactor: Merge validations for same methods | status "done"
+
+## Jose Luis Teran
+* UML: Migrate UML diagram | status "done"
+* CI: Implementing C# conventions | status "done"
+* CI: Workflows and VS Code Extensions | status "done"
+* Bugfix: Unit test for controllers | status "done"
+
+## Ronaldo Mendoza
+* Refactor: Application of design pattern in validations | status "done"
+* Refactor: Update tests for validations | status "done"
+
 ## Development Team Conventions
 
 ### Branch Naming Convention
