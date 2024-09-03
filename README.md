@@ -1,33 +1,37 @@
-# Los Gosus - Library Proyect
-## Members:
-* Luis Enrique Espinoza Vera
-* Sebasthian Khristian Salinas Pozzo
-* Josue Mauricio Prado Camacho
-* Ignacio Ruben Villarroel Rodriguez
+# Los Gosus - Library Project
 
-## new Members:
-* Alex Paca Meneses
-* Jose Luis Teran Rocha
-* Ronaldo Mendoza Mallcu
+| Members                             | New Members
+| ---                                 | ---
+| Luis Enrique Espinoza Vera          | Alex Paca Meneses
+| Sebasthian Khristian Salinas Pozzo  | José Luis Terán Rocha
+| Josue Mauricio Prado Camacho        | Ronaldo Mendoza Mallcu
+| Ignacio Ruben Villarroel Rodriguez  |
 
-## Tasks to be worked on
+## Tasks to be worked on:
 
 ## Alex Paca Meneses
-* Bugfix: Delete validation for null books or patrons | status "done"
-* Bugfix: Generation of empty reports | status "done"
-* Bugfix: Update non existent Patron or Book | status "done"
-* Refactor: Book and Patron manager show methods | status "done"
-* Refactor: Merge validations for same methods | status "done"
+| Ticket                                              | Status
+| ---                                                 | ---
+| Bugfix: Delete validation for null books or patrons | **Done**
+| Bugfix: Generation of empty reports                 | **Done**
+| Bugfix: Update non existent Patron or Book          | **Done**
+| Refactor: Book and Patron manager show methods      | **Done**
+| Refactor: Merge validations for same methods        | **Done**
 
-## Jose Luis Teran
-* UML: Migrate UML diagram | status "done"
-* CI: Implementing C# conventions | status "done"
-* CI: Workflows and VS Code Extensions | status "done"
-* Bugfix: Unit test for controllers | status "done"
+## José Luis Terán
+| Ticket                                              | Status
+| ---                                                 | ---
+| UML: Migrate UML diagram                            | **Done**
+| CI: Implementing C# conventions                     | **Done**
+| CI: Workflows and VS Code Extensions                | **Done**
+| Bugfix: Unit test for controllers                   | **Done**
+| Build: Refactor Project Structure                   | **Done** but not merged
 
 ## Ronaldo Mendoza
-* Refactor: Application of design pattern in validations | status "done"
-* Refactor: Update tests for validations | status "done"
+| Ticket                                                  | Status
+| ---                                                     | ---
+| Refactor: Application of design pattern in validations  | **Done**
+| Refactor: Update tests for validations                  | **Done**
 
 ## Development Team Conventions
 
